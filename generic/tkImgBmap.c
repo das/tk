@@ -498,7 +498,8 @@ TkGetBitmapData(interp, string, fileName, widthPtr, heightPtr,
     int *hotXPtr, *hotYPtr;		/* Position of hot spot or -1,-1. */
 {
     int width, height, numBytes, hotX, hotY;
-    char *p, *end, *expandedFileName;
+    CONST char *expandedFileName;
+    char *p, *end;
     ParseInfo pi;
     char *data = NULL;
     Tcl_DString buffer;
@@ -761,7 +762,7 @@ ImgBmapCmd(clientData, interp, objc, objv)
     int objc;			/* Number of arguments. */
     Tcl_Obj *CONST objv[];	/* Argument objects. */
 {
-    static char *bmapOptions[] = {"cget", "configure", (char *) NULL};
+    static CONST char *bmapOptions[] = {"cget", "configure", (char *) NULL};
     BitmapMaster *masterPtr = (BitmapMaster *) clientData;
     int code, index;
 

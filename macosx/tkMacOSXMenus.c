@@ -13,7 +13,6 @@
  * RCS: @(#) $Id$
  */
 
-#include "tcl.h"
 #include "tk.h"
 #include "tkInt.h"
 #include "tkMacOSXInt.h"
@@ -96,16 +95,6 @@ TkMacOSXHandleMenuSelect(
                         }
                         break;
                     }
-#ifdef STUBBED_OUT_FOR_OSX
-                default:
-                    {    
-                        Str255 name;
-                        GetItem(tkAppleMenu, theItem, name);
-                        HiliteMenu(0);
-                        OpenDeskAcc(name);
-                        return;
-                    }
-#endif
             }
             break;
         case kFileMenu:
@@ -148,7 +137,7 @@ TkMacOSXHandleMenuSelect(
      * Finally we unhighlight the menu.
      */
     HiliteMenu(0);
-} /* TkMacOSXHandleMenuSelect */
+}
 
 /*
  *----------------------------------------------------------------------

@@ -262,6 +262,7 @@ proc ::tk::EventMotifBindings {n1 dummy dummy} {
     event $op <<Cut>> <Control-Key-w>
     event $op <<Copy>> <Meta-Key-w> 
     event $op <<Paste>> <Control-Key-y>
+    event $op <<Undo>> <Control-underscore>
 }
 
 #----------------------------------------------------------------------
@@ -313,6 +314,8 @@ switch $tcl_platform(windowingsystem) {
 	event add <<Copy>> <Control-Key-c> <Key-F16>
 	event add <<Paste>> <Control-Key-v> <Key-F18>
 	event add <<PasteSelection>> <ButtonRelease-2>
+	event add <<Undo>> <Control-Key-z>
+	event add <<Redo>> <Control-Key-Z>
 	# Some OS's define a goofy (as in, not <Shift-Tab>) keysym
 	# that is returned when the user presses <Shift-Tab>.  In order for
 	# tab traversal to work, we have to add these keysyms to the 
@@ -344,6 +347,8 @@ switch $tcl_platform(windowingsystem) {
 	event add <<Paste>> <Control-Key-v> <Key-F4>
 	event add <<PasteSelection>> <ButtonRelease-2>
 	event add <<Clear>> <Clear>
+  	event add <<Undo>> <Control-Key-z>
+	event add <<Redo>> <Control-Key-y>
     }
     "classic" {
 	event add <<Cut>> <Control-Key-x> <Key-F2> 
@@ -351,6 +356,8 @@ switch $tcl_platform(windowingsystem) {
 	event add <<Paste>> <Control-Key-v> <Key-F4>
 	event add <<PasteSelection>> <ButtonRelease-2>
 	event add <<Clear>> <Clear>
+	event add <<Undo>> <Control-Key-z> <Key-F1>
+	event add <<Redo>> <Control-Key-Z>
     }
 }
 

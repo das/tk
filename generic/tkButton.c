@@ -481,7 +481,7 @@ static Tk_OptionSpec *optionSpecs[] = {
  * into a single enumerated type used to dispatch the widget command.
  */
 
-static char *commandNames[][8] = {
+static CONST char *commandNames[][8] = {
     {"cget", "configure", (char *) NULL},
     {"cget", "configure", "flash", "invoke", (char *) NULL},
     {"cget", "configure", "deselect", "flash", "invoke", "select",
@@ -942,9 +942,9 @@ static void
 DestroyButton(butPtr)
     TkButton *butPtr;		/* Info about button widget. */
 {
+    butPtr->flags |= BUTTON_DELETED;
     TkpDestroyButton(butPtr);
 
-    butPtr->flags |= BUTTON_DELETED;
     if (butPtr->flags & REDRAW_PENDING) {
 	Tcl_CancelIdleCall(TkpDisplayButton, (ClientData) butPtr);
     }
@@ -1624,6 +1624,10 @@ ButtonTextVarProc(clientData, interp, name1, name2, flags)
     TkButton *butPtr = (TkButton *) clientData;
     char *name;
     Tcl_Obj *valuePtr;
+
+    if (butPtr->flags & BUTTON_DELETED) {
+	return (char *) NULL;
+    }
 
     name = Tcl_GetString(butPtr->textVarNamePtr);
 

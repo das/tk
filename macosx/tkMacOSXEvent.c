@@ -22,8 +22,6 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
-#include <tcl.h>
-
 #include "tkMacOSXInt.h"
 #include "tkMacOSXEvent.h"
 #include "tkMacOSXDebug.h"

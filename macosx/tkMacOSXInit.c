@@ -137,8 +137,8 @@ TkpGetAppName(interp, namePtr)
 
 void
 TkpDisplayWarning(msg, title)
-    char *msg;                  /* Message to be displayed. */
-    char *title;                /* Title of warning. */
+    CONST char *msg;                  /* Message to be displayed. */
+    CONST char *title;                /* Title of warning. */
 {
     Tcl_Channel errChannel = Tcl_GetStdChannel(TCL_STDERR);
     if (errChannel) {

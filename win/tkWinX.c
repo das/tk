@@ -14,6 +14,7 @@
  */
 
 #include "tkWinInt.h"
+#include <commctrl.h>
 
 /*
  * The zmouse.h file includes the definition for WM_MOUSEWHEEL.
@@ -26,6 +27,38 @@
  */
 
 #include <imm.h>
+
+static TkWinProcs asciiProcs = {
+    0,
+
+    (LRESULT (WINAPI *)(WNDPROC lpPrevWndFunc, HWND hWnd, UINT Msg,
+	    WPARAM wParam, LPARAM lParam)) CallWindowProcA,
+    (LRESULT (WINAPI *)(HWND hWnd, UINT Msg, WPARAM wParam,
+	    LPARAM lParam)) DefWindowProcA,
+    (ATOM (WINAPI *)(CONST WNDCLASS *lpWndClass)) RegisterClassA,
+    (BOOL (WINAPI *)(HWND hWnd, LPCTSTR lpString)) SetWindowTextA,
+    (HWND (WINAPI *)(DWORD dwExStyle, LPCTSTR lpClassName,
+	    LPCTSTR lpWindowName, DWORD dwStyle, int x, int y,
+	    int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
+	    HINSTANCE hInstance, LPVOID lpParam)) CreateWindowExA,
+};
+
+static TkWinProcs unicodeProcs = {
+    1,
+
+    (LRESULT (WINAPI *)(WNDPROC lpPrevWndFunc, HWND hWnd, UINT Msg,
+	    WPARAM wParam, LPARAM lParam)) CallWindowProcW,
+    (LRESULT (WINAPI *)(HWND hWnd, UINT Msg, WPARAM wParam,
+	    LPARAM lParam)) DefWindowProcW,
+    (ATOM (WINAPI *)(CONST WNDCLASS *lpWndClass)) RegisterClassW,
+    (BOOL (WINAPI *)(HWND hWnd, LPCTSTR lpString)) SetWindowTextW,
+    (HWND (WINAPI *)(DWORD dwExStyle, LPCTSTR lpClassName,
+	    LPCTSTR lpWindowName, DWORD dwStyle, int x, int y,
+	    int nWidth, int nHeight, HWND hWndParent, HMENU hMenu,
+	    HINSTANCE hInstance, LPVOID lpParam)) CreateWindowExW,
+};
+
+TkWinProcs *tkWinProcs;
 
 /*
  * Declarations of static variables used in this file.
@@ -154,6 +187,21 @@ TkWinXInit(hInstance)
     }
     childClassInitialized = 1;
 
+    if (TkWinGetPlatformId() == VER_PLATFORM_WIN32_NT) {
+	/*
+	 * This is necessary to enable the use of themeable elements on XP,
+	 * so we don't even try and call it for Win9*.
+	 */
+
+	INITCOMMONCONTROLSEX comctl;
+	ZeroMemory(&comctl, sizeof(comctl));
+	(void) InitCommonControlsEx(&comctl);
+
+	tkWinProcs = &unicodeProcs;
+    } else {
+	tkWinProcs = &asciiProcs;
+    }
+
     tkInstance = hInstance;
 
     /*
@@ -277,10 +325,10 @@ TkWinGetPlatformId()
  *----------------------------------------------------------------------
  */
 
-char *
+CONST char *
 TkGetDefaultScreenName(interp, screenName)
     Tcl_Interp *interp;		/* Not used. */
-    char *screenName;		/* If NULL, use default string. */
+    CONST char *screenName;	/* If NULL, use default string. */
 {
     if ((screenName == NULL) || (screenName[0] == '\0')) {
 	screenName = winScreenName;
@@ -307,7 +355,7 @@ TkGetDefaultScreenName(interp, screenName)
 
 TkDisplay *
 TkpOpenDisplay(display_name)
-    char *display_name;
+    CONST char *display_name;
 {
     Screen *screen;
     HDC dc;

@@ -23,8 +23,6 @@
 #include <pthread.h>
 #include <sys/types.h>
 
-#include <tcl.h>
-
 #include <X11/Xatom.h>
 
 #include <Carbon/Carbon.h>
@@ -92,7 +90,7 @@ int _XInitImageFuncPtrs _ANSI_ARGS_((XImage *image));
 
 TkDisplay *
 TkpOpenDisplay(
-    char *display_name)
+    CONST char *display_name)
 {
     Display *display;
     Screen *screen;
@@ -843,10 +841,10 @@ XCreateIC(
  *----------------------------------------------------------------------
  */
 
-char *
+CONST char *
 TkGetDefaultScreenName(
     Tcl_Interp *interp,		/* Not used. */
-    char *screenName)		/* If NULL, use default string. */
+    CONST char *screenName)		/* If NULL, use default string. */
 {
 #if 0
     if ((screenName == NULL) || (screenName[0] == '\0')) {

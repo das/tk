@@ -810,7 +810,7 @@ TkBindFree(mainPtr)
     bindInfoPtr = (BindInfo *) mainPtr->bindInfo;
     DeleteVirtualEventTable(&bindInfoPtr->virtualEventTable);
     bindInfoPtr->deleted = 1;
-    Tcl_EventuallyFree((ClientData) bindInfoPtr, Tcl_Free);
+    Tcl_EventuallyFree((ClientData) bindInfoPtr, TCL_DYNAMIC);
     mainPtr->bindInfo = NULL;
 }
 
@@ -2617,7 +2617,7 @@ Tk_EventObjCmd(clientData, interp, objc, objv)
     Tk_Window tkwin;
     VirtualEventTable *vetPtr;
     TkBindInfo bindInfo;
-    static char *optionStrings[] = {
+    static CONST char *optionStrings[] = {
 	"add",		"delete",	"generate",	"info",
 	NULL
     };
@@ -2941,7 +2941,7 @@ DeleteVirtualEvent(interp, vetPtr, virtString, eventString)
 	eventPSPtr = FindSequence(interp, &vetPtr->patternTable, NULL,
 		eventString, 0, 0, &eventMask);
 	if (eventPSPtr == NULL) {
-	    char *string;
+	    CONST char *string;
 
 	    string = Tcl_GetStringResult(interp); 
 	    return (string[0] != '\0') ? TCL_ERROR : TCL_OK;
@@ -3186,7 +3186,7 @@ HandleEventGenerate(interp, mainWin, objc, objv)
     Tk_Window tkwin, tkwin2;
     TkWindow *mainPtr;
     unsigned long eventMask;
-    static char *fieldStrings[] = {
+    static CONST char *fieldStrings[] = {
 	"-when",	"-above",	"-borderwidth",	"-button",
 	"-count",	"-delta",	"-detail",	"-focus",
 	"-height",

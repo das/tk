@@ -589,6 +589,12 @@ TkPutImage(colors, ncolors, display, d, gc, image, src_x, src_y, dest_x,
 		image->data, infoPtr, DIB_RGB_COLORS);
 	ckfree((char *) infoPtr);
     }
+    if(!bitmap) {
+	panic("Fail to allocate bitmap\n");
+	DeleteDC(dcMem);
+    	TkWinReleaseDrawableDC(d, dc, &state);
+	return;
+    }
     bitmap = SelectObject(dcMem, bitmap);
     BitBlt(dc, dest_x, dest_y, width, height, dcMem, src_x, src_y, SRCCOPY);
     DeleteObject(SelectObject(dcMem, bitmap));

@@ -13,7 +13,6 @@
  * RCS: @(#) $Id$
  */
 
-#include "tcl.h"
 #include "tkMacOSXUtil.h"
 #include "tkMacOSXInt.h"
 
