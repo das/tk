@@ -1304,7 +1304,7 @@ UpdateDisplayInfo(textPtr)
 		 */
 
 		TkTextPrintIndex(&index, string);
-		Tcl_SetVar2(textPtr->interp, "tk::textRelayout", (char *) NULL,
+		Tcl_SetVar2(textPtr->interp, "tk_textRelayout", (char *) NULL,
 			string,
 			TCL_GLOBAL_ONLY|TCL_APPEND_VALUE|TCL_LIST_ELEMENT);
 	    }
@@ -1465,7 +1465,7 @@ UpdateDisplayInfo(textPtr)
 		    char string[TK_POS_CHARS];
 
 		    TkTextPrintIndex(&dlPtr->index, string);
-		    Tcl_SetVar2(textPtr->interp, "tk::textRelayout",
+		    Tcl_SetVar2(textPtr->interp, "tk_textRelayout",
 			    (char *) NULL, string,
 			    TCL_GLOBAL_ONLY|TCL_APPEND_VALUE|TCL_LIST_ELEMENT);
 		}
@@ -2171,7 +2171,7 @@ DisplayText(clientData)
     Tcl_Preserve((ClientData) interp);
 
     if (tkTextDebug) {
-	Tcl_SetVar2(interp, "tk::textRelayout", (char *) NULL, "",
+	Tcl_SetVar2(interp, "tk_textRelayout", (char *) NULL, "",
                 TCL_GLOBAL_ONLY);
     }
 
@@ -2192,7 +2192,7 @@ DisplayText(clientData)
     }
     numRedisplays++;
     if (tkTextDebug) {
-	Tcl_SetVar2(interp, "tk::textRedraw", (char *) NULL, "",
+	Tcl_SetVar2(interp, "tk_textRedraw", (char *) NULL, "",
                 TCL_GLOBAL_ONLY);
     }
 
@@ -2338,7 +2338,7 @@ DisplayText(clientData)
 
     if (dInfoPtr->flags & REDRAW_BORDERS) {
 	if (tkTextDebug) {
-	    Tcl_SetVar2(interp, "tk::textRedraw", (char *) NULL, "borders",
+	    Tcl_SetVar2(interp, "tk_textRedraw", (char *) NULL, "borders",
 		    TCL_GLOBAL_ONLY|TCL_APPEND_VALUE|TCL_LIST_ELEMENT);
 	}
 
@@ -2430,7 +2430,7 @@ DisplayText(clientData)
 		if (tkTextDebug) {
 		    char string[TK_POS_CHARS];
 		    TkTextPrintIndex(&dlPtr->index, string);
-		    Tcl_SetVar2(textPtr->interp, "tk::textRedraw",
+		    Tcl_SetVar2(textPtr->interp, "tk_textRedraw",
 			    (char *) NULL, string,
 			    TCL_GLOBAL_ONLY|TCL_APPEND_VALUE|TCL_LIST_ELEMENT);
 		}
@@ -2459,7 +2459,7 @@ DisplayText(clientData)
     }
     if (bottomY < dInfoPtr->topOfEof) {
 	if (tkTextDebug) {
-	    Tcl_SetVar2(textPtr->interp, "tk::textRedraw",
+	    Tcl_SetVar2(textPtr->interp, "tk_textRedraw",
 		    (char *) NULL, "eof",
 		    TCL_GLOBAL_ONLY|TCL_APPEND_VALUE|TCL_LIST_ELEMENT);
 	}

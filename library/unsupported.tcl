@@ -230,8 +230,6 @@ namespace eval ::tk::unsupported {
     variable PrivateVariables
     array set PrivateVariables {
 	histNum			::tk::histNum
-	tk_textRedraw		::tk::textRedraw
-	tk_textRelayout		::tk::textRelayout
 	tkFocusIn		::tk::FocusIn
 	tkFocusOut		::tk::FocusOut
 	tkPalette		::tk::Palette
