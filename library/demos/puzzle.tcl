@@ -59,7 +59,7 @@ scrollbar $w.s
 # using place which doesn't autosize, then we need to have a 
 # slightly larger frame here...
 
-if {[string equal $tcl_platform(windowingsystem) aqua]} {
+if {[string equal [tk windowingsystem] aqua]} {
     set frameSize 160
 } else {
     set frameSize 120

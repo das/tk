@@ -79,7 +79,7 @@ static int gTkOwnsCursor = true;             /* A boolean indicating whether
  */
 
 static  void FindCursorByName _ANSI_ARGS_ ((TkMacOSXCursor *macCursorPtr,
-                     char *string));
+                    CONST char *string));
 
 /*
  *----------------------------------------------------------------------
@@ -104,7 +104,7 @@ static  void FindCursorByName _ANSI_ARGS_ ((TkMacOSXCursor *macCursorPtr,
 void 
 FindCursorByName(
     TkMacOSXCursor *macCursorPtr,
-    char *string)
+    CONST char *string)
 {
     Handle resource;
     Str255 curName;
@@ -199,7 +199,7 @@ TkGetCursorByName(
         FindCursorByName(macCursorPtr, string);
 
         if (macCursorPtr->macCursor == NULL) {
-            char **argv;
+            CONST char **argv;
             int argc, err;
             
             /*

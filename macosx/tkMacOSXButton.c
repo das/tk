@@ -511,7 +511,7 @@ void
 TkpComputeButtonGeometry(
     TkButton *butPtr)        /* Button whose geometry may have changed. */
 {
-    int width, height, avgWidth, haveImage = 0, haveText;
+    int width, height, avgWidth, haveImage = 0, haveText = 0;
     int xInset, yInset;
     int txtWidth, txtHeight;
     Tk_FontMetrics fm;

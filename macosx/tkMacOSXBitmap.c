@@ -101,7 +101,7 @@ TkpDefineNativeBitmaps()
     int new;
     Tcl_HashEntry *predefHashPtr;
     TkPredefBitmap *predefPtr;
-    char * name;
+    CONST char * name;
     BuiltInIcon *builtInPtr;
     NativeIcon *nativeIconPtr;
     Tcl_HashTable *tablePtr;
@@ -146,7 +146,7 @@ TkpDefineNativeBitmaps()
 Pixmap
 TkpCreateNativeBitmap(
     Display *display,
-    char * source)                /* Info about the icon to build. */
+    CONST char * source)                /* Info about the icon to build. */
 {
     Pixmap pix;
     GWorldPtr destPort;
@@ -216,7 +216,7 @@ TkpGetNativeAppBitmap(
     GWorldPtr destPort;
     Rect destRect;
     Handle resource;
-    int type, destWrote;
+    int type = -1, destWrote;
     Str255 nativeName;
     
     /*

@@ -48,7 +48,6 @@ TkpInit(interp)
      * otherwise because TkWinXInit flips a static bit to do
      * its work just once.
      */
-    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", "win32", TCL_GLOBAL_ONLY);
     TkWinXInit(GetModuleHandle(NULL));
     return Tcl_Eval(interp, initScript);
 }

@@ -50,7 +50,7 @@ bind Entry <<Copy>> {
 bind Entry <<Paste>> {
     global tcl_platform
     catch {
-	if {[string compare $tcl_platform(windowingsystem) "x11"]} {
+	if {[string compare [tk windowingsystem] "x11"]} {
 	    catch {
 		%W delete sel.first sel.last
 	    }
@@ -203,8 +203,8 @@ bind Entry <Escape> {# nothing}
 bind Entry <Return> {# nothing}
 bind Entry <KP_Enter> {# nothing}
 bind Entry <Tab> {# nothing}
-if {[string equal $tcl_platform(windowingsystem) "classic"]
-	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
+if {[string equal [tk windowingsystem] "classic"]
+	|| [string equal [tk windowingsystem] "aqua"]} {
 	bind Entry <Command-KeyPress> {# nothing}
 }
 

@@ -474,12 +474,12 @@ EXTERN void		TkUnionRectWithRegion _ANSI_ARGS_((XRectangle* rect,
 #ifdef MAC_TCL
 /* 121 */
 EXTERN Pixmap		TkpCreateNativeBitmap _ANSI_ARGS_((Display * display, 
-				char * source));
+				CONST char * source));
 #endif /* MAC_TCL */
 #ifdef MAC_OSX_TK
 /* 121 */
 EXTERN Pixmap		TkpCreateNativeBitmap _ANSI_ARGS_((Display * display, 
-				char * source));
+				CONST char * source));
 #endif /* MAC_OSX_TK */
 #ifdef MAC_TCL
 /* 122 */
@@ -766,10 +766,10 @@ typedef struct TkIntStubs {
     void *reserved121;
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
-    Pixmap (*tkpCreateNativeBitmap) _ANSI_ARGS_((Display * display, char * source)); /* 121 */
+    Pixmap (*tkpCreateNativeBitmap) _ANSI_ARGS_((Display * display, CONST char * source)); /* 121 */
 #endif /* MAC_TCL */
 #ifdef MAC_OSX_TK
-    Pixmap (*tkpCreateNativeBitmap) _ANSI_ARGS_((Display * display, char * source)); /* 121 */
+    Pixmap (*tkpCreateNativeBitmap) _ANSI_ARGS_((Display * display, CONST char * source)); /* 121 */
 #endif /* MAC_OSX_TK */
 #if !defined(__WIN32__) && !defined(MAC_TCL) /* UNIX */
     void *reserved122;

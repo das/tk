@@ -571,7 +571,7 @@ ThumbActionProc()
     Rect trackRect;
     Tcl_Interp *interp;
     MouseTrackingResult trackingResult;
-    int  err;
+    OSErr err;
     
     if (scrollPtr == NULL) {
         return;
@@ -588,7 +588,7 @@ ThumbActionProc()
      *
      * Note: the arrowLength is equal to the thumb width of a Mac scrollbar.
      */
-     
+
     origValue = GetControlValue(macScrollPtr->sbHandle);
     GetControlBounds(macScrollPtr->sbHandle, &trackRect);
     if (scrollPtr->vertical == true) {
@@ -611,10 +611,8 @@ ThumbActionProc()
      * we calculate the value that should be passed to the "command" part of
      * the scrollbar.
      */
-     
+
     do {
-        OSErr err;
-        
         err = TrackMouseLocationWithOptions(NULL,
                 kTrackMouseLocationOptionDontConsumeMouseUp,
                 kEventDurationForever,
@@ -662,7 +660,7 @@ ThumbActionProc()
             Tcl_Release((ClientData) interp);
         }
     } while ((err==noErr) && trackingResult!=kMouseTrackingMouseReleased );
-        
+
     Tcl_DStringFree(&cmdString);
     return;
 }

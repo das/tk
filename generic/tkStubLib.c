@@ -21,18 +21,6 @@
  * including the rest of the stub functions.
  */
 
-/*
- * Because of problems with pre-compiled headers on the Mac, we need to
- * do these includes before we add the stubs defines.  This a hack.
- */
-
-#if defined(MAC_OSX_TK)
-#include "tkMacOSXInt.h"
-
-#include "tkInt.h"
-#include "tkPort.h"
-#endif /* MAC_OSX_TK */
-
 #ifndef USE_TCL_STUBS
 #define USE_TCL_STUBS
 #endif
@@ -52,6 +40,10 @@
 
 #ifdef MAC_TCL
 #include "tkMacInt.h"
+#endif
+
+#ifdef MAC_OSX_TK
+#include "tkMacOSXInt.h"
 #endif
 
 #include "tkDecls.h"

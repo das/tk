@@ -412,7 +412,7 @@ int
 {
     int found = 0;
     int newEntry;
-    Tcl_HashEntry *commandEntryPtr;
+    Tcl_HashEntry *commandEntryPtr = NULL;
     short returnID = *menuIDPtr;
 
     /*
@@ -1086,7 +1086,6 @@ ReconfigureIndividualMenu(
 	      cf = CFSTR ("<Error>");
 	      SetMenuItemTextWithCFString(macMenuHdl, base + index, cf);
 	    }
-	      
 	    Tcl_DStringFree(&itemTextDString);
 	
     	    /*
@@ -2441,7 +2440,7 @@ DrawSICN(
 	CGrafPtr saveWorld;
 	GDHandle saveDevice;
 	GWorldPtr destPort;
-	BitMapPtr destBitMap;
+	const BitMap *destBitMap;
 	RGBColor origForeColor, origBackColor, foreColor, backColor;
 
 	HLock(sicnHandle);
@@ -3985,7 +3984,7 @@ HandleMenuHiliteMsg (MenuRef menu,
         SInt16 *whichItem,
         TkMenu *menuPtr)
 {
-    TkMenuEntry *mePtr;
+    TkMenuEntry *mePtr = NULL;
     Tk_Font tkfont;
     Tk_FontMetrics fontMetrics;
     int oldItem;
@@ -4277,7 +4276,7 @@ HandleMenuFindItemsMsg (MenuRef menu,
         DONT_SCROLL, DOWN_SCROLL, UP_SCROLL
     } scrollDirection;
     Rect updateRect;
-    short scrollAmt;
+    short scrollAmt = 0;
     RGBColor origForeColor, origBackColor;
     
     /*
@@ -4421,7 +4420,7 @@ HandleMenuFindItemsMsg (MenuRef menu,
         Tk_Font menuFont;
         RgnHandle updateRgn = NewRgn();
         
-        ScrollMenuImage(menu, &menuRectPtr, 0, scrollAmt, NULL);
+        ScrollMenuImage(menu, menuRectPtr, 0, scrollAmt, NULL);
         mtdPtr->virtualMenuTop += scrollAmt;
         mtdPtr->virtualMenuBottom += scrollAmt;
 #if 0

@@ -66,13 +66,13 @@ proc ::tk_dialog {w title text bitmap default args} {
     }    
 
     if {[string equal $tcl_platform(platform) "macintosh"]
-	    || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	    || [string equal [tk windowingsystem] "aqua"]} {
 	::tk::unsupported::MacWindowStyle style $w dBoxProc
     }
 
     frame $w.bot
     frame $w.top
-    if {[string equal $tcl_platform(windowingsystem) "x11"]} {
+    if {[string equal [tk windowingsystem] "x11"]} {
 	$w.bot configure -relief raised -bd 1
 	$w.top configure -relief raised -bd 1
     }
@@ -85,7 +85,7 @@ proc ::tk_dialog {w title text bitmap default args} {
 
     option add *Dialog.msg.wrapLength 3i widgetDefault
     if {[string equal $tcl_platform(platform) "macintosh"]
-	    || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	    || [string equal [tk windowingsystem] "aqua"]} {
 	option add *Dialog.msg.font system widgetDefault
     } else {
 	option add *Dialog.msg.font {Times 12} widgetDefault
@@ -95,7 +95,7 @@ proc ::tk_dialog {w title text bitmap default args} {
     pack $w.msg -in $w.top -side right -expand 1 -fill both -padx 3m -pady 3m
     if {[string compare $bitmap ""]} {
 	if {([string equal $tcl_platform(platform) "macintosh"]
-	     || [string equal $tcl_platform(windowingsystem) "aqua"]) &&\
+	     || [string equal [tk windowingsystem] "aqua"]) &&\
 		[string equal $bitmap "error"]} {
 	    set bitmap "stop"
 	}
@@ -118,7 +118,7 @@ proc ::tk_dialog {w title text bitmap default args} {
 	grid columnconfigure $w.bot $i
 	# We boost the size of some Mac buttons for l&f
 	if {[string equal $tcl_platform(platform) "macintosh"]
-	    || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	    || [string equal [tk windowingsystem] "aqua"]} {
 	    set tmp [string tolower $but]
 	    if {[string equal $tmp "ok"] || [string equal $tmp "cancel"]} {
 		grid columnconfigure $w.bot $i -minsize [expr {59 + 20}]

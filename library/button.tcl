@@ -18,8 +18,8 @@
 # The code below creates the default class bindings for buttons.
 #-------------------------------------------------------------------------
 
-if {[string equal $tcl_platform(windowingsystem) "classic"]
-	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
+if {[string equal [tk windowingsystem] "classic"]
+	|| [string equal [tk windowingsystem] "aqua"]} {
     bind Radiobutton <Enter> {
 	tk::ButtonEnter %W
     }
@@ -69,7 +69,7 @@ if {[string equal "windows" $tcl_platform(platform)]} {
 	tk::CheckRadioEnter %W
     }
 }
-if {[string equal "x11" $tcl_platform(windowingsystem)]} {
+if {[string equal "x11" [tk windowingsystem]]} {
     bind Checkbutton <Return> {
 	if {!$tk_strictMotif} {
 	    tk::CheckRadioInvoke %W
@@ -299,7 +299,7 @@ proc ::tk::CheckRadioDown w {
 
 }
 
-if {[string equal "x11" $tcl_platform(windowingsystem)]} {
+if {[string equal "x11" [tk windowingsystem]]} {
 
 #####################
 # Unix implementation
@@ -426,8 +426,8 @@ proc ::tk::ButtonUp w {
 
 }
 
-if {[string equal $tcl_platform(windowingsystem) "classic"]
-	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
+if {[string equal [tk windowingsystem] "classic"]
+	|| [string equal [tk windowingsystem] "aqua"]} {
 
 ####################
 # Mac implementation

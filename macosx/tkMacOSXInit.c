@@ -136,9 +136,6 @@ TkpInit(interp)
 	}
     }
     
-    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", 
-            "aqua", TCL_GLOBAL_ONLY);
-    
     /*
      * When Tk is in a framework, force tcl_findLibrary to look in the 
      * framework scripts directory.

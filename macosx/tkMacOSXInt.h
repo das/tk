@@ -15,9 +15,22 @@
 #ifndef _TKMACINT
 #define _TKMACINT
 
+#ifndef _TKINT
 #include "tkInt.h"
+#endif
 
+/*
+ * Include platform specific public interfaces.
+ */
+
+#ifndef _TKMAC
 #include "tkMacOSX.h"
+#endif
+
+#ifndef _TKPORT
+#include "tkPort.h"
+#endif
+
 #include <Carbon/Carbon.h>
 
 struct TkWindowPrivate {

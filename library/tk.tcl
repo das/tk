@@ -257,7 +257,7 @@ proc ::tk::ScreenChanged screen {
 	selectMode	char
     }
     set Priv(screen) $screen
-    set Priv(tearoff) [string equal $tcl_platform(windowingsystem) "x11"]
+    set Priv(tearoff) [string equal [tk windowingsystem] "x11"]
     set Priv(window) {}
 }
 
@@ -333,7 +333,7 @@ if {[string equal [info command tk_chooseDirectory] ""]} {
 # Define the set of common virtual events.
 #----------------------------------------------------------------------
 
-switch $tcl_platform(windowingsystem) {
+switch [tk windowingsystem] {
     "x11" {
 	event add <<Cut>> <Control-Key-x> <Key-F20> 
 	event add <<Copy>> <Control-Key-c> <Key-F16>
@@ -568,7 +568,7 @@ proc ::tk::mcmaxamp {args} {
 }
 # For now, turn off the custom mdef proc for the mac:
 
-if {[string equal $tcl_platform(windowingsystem) "aqua"]} {
+if {[string equal [tk windowingsystem] "aqua"]} {
     namespace eval ::tk::mac {
 	set useCustomMDEF 0
     }

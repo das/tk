@@ -44,7 +44,6 @@ int
 TkpInit(interp)
     Tcl_Interp *interp;
 {
-    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", "x11", TCL_GLOBAL_ONLY);
     TkCreateXEventSource();
     return Tcl_Eval(interp, initScript);
 }

@@ -19,7 +19,7 @@
 #include "tkMacOSXInt.h"
 
 typedef struct {
-    short keycode;		/* Macintosh keycode */
+    int keycode;		/* Macintosh keycode */
     KeySym keysym;		/* X windows Keysym */
 } KeyInfo;
 
@@ -141,7 +141,7 @@ XKeycodeToKeysym(
 {
     register Tcl_HashEntry *hPtr;
     int c;
-    char virtualKey;
+    int virtualKey;
     int newKeycode;
     unsigned long dummy, newChar;
 
@@ -216,7 +216,7 @@ TkpGetString(
 {
     register Tcl_HashEntry *hPtr;
     char string[3];
-    char virtualKey;
+    int virtualKey;
     int c, len;
 
     if (!initialized) {

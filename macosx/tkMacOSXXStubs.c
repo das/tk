@@ -95,7 +95,7 @@ TkpOpenDisplay(
     Display *display;
     Screen *screen;
     GDHandle graphicsDevice;
-    int      fd;
+    int      fd = 0;
     if (gMacDisplay != NULL) {
 	if (strcmp(gMacDisplay->display->display_name, display_name) == 0) {
 	    return gMacDisplay;

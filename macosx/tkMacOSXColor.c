@@ -67,7 +67,7 @@ TkSetMacColor(
             LMGetHiliteRGB(macColor);
             if ((macColor->red == 0) && (macColor->green == 0)
                     && (macColor->blue == 0)) {
-                macColor->red = macColor->green = macColor->blue = 0xFFFFFFFF;
+                macColor->red = macColor->green = macColor->blue = 0xFFFF;
             } else {
                 macColor->red = macColor->green = macColor->blue = 0;
             }
@@ -202,7 +202,7 @@ TkpGetColor(
     if (strncasecmp(name, "system", 6) == 0) {
         int foundSystemColor = false;
         RGBColor rgbValue;
-        char pixelCode;
+        char pixelCode = 0;
         
         if (!strcasecmp(name+6, "Highlight")) {
             LMGetHiliteRGB(&rgbValue);
@@ -212,7 +212,7 @@ TkpGetColor(
             LMGetHiliteRGB(&rgbValue);
             if ((rgbValue.red == 0) && (rgbValue.green == 0)
                     && (rgbValue.blue == 0)) {
-                rgbValue.red = rgbValue.green = rgbValue.blue = 0xFFFFFFFF;
+                rgbValue.red = rgbValue.green = rgbValue.blue = 0xFFFF;
             } else {
                 rgbValue.red = rgbValue.green = rgbValue.blue = 0;
             }

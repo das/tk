@@ -50,7 +50,7 @@ proc ::tk::ConsoleInit {} {
     }
 
     if {[string equal $tcl_platform(platform) "macintosh"]
-	    || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	    || [string equal [tk windowingsystem] "aqua"]} {
 	set mod "Cmd"
     } else {
 	set mod "Ctrl"
@@ -68,7 +68,7 @@ proc ::tk::ConsoleInit {} {
     .menubar.file add command -label [mc "Clear Console"] \
 	    -underline 0 -command {.console delete 1.0 "promptEnd linestart"}
    if {[string equal $tcl_platform(platform) "macintosh"]
-	   || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	   || [string equal [tk windowingsystem] "aqua"]} {
 	.menubar.file add command -label [mc "Quit"] \
 		-command exit -accel Cmd-Q
     } else {
@@ -111,7 +111,7 @@ proc ::tk::ConsoleInit {} {
 	    $con configure -font systemfixed
 	}
 	"unix" {
-	    if {[string equal $tcl_platform(windowingsystem) "aqua"]} {
+	    if {[string equal [tk windowingsystem] "aqua"]} {
 		$con configure -font {Monaco 9 normal} -highlightthickness 0
 	    }
 	}

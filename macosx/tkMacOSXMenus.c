@@ -175,7 +175,9 @@ TkMacOSXInitMenus(
     InsertMenu(tkAppleMenu, 0);
     AppendMenu(tkAppleMenu, "\pAbout Tcl & Tk…");
     AppendMenu(tkAppleMenu, "\p(-");
+    /* Not necessary in Carbon:
     AppendResMenu(tkAppleMenu, 'DRVR');
+    */
 
     if (TkMacOSXUseMenuID(kFileMenu) != TCL_OK) {
             panic("Menu ID %d is already in use!", kFileMenu);
@@ -302,8 +304,8 @@ static void
 SourceDialog()
 {
     int result;
-    char *path;
-    char openCmd[] = "tk_getOpenFile -filetypes {\
+    CONST char *path;
+    CONST char *openCmd = "tk_getOpenFile -filetypes {\
             {{TCL Scripts} {.tcl} TEXT} {{Text Files} {} TEXT}}";
     
     if (gInterp == NULL) {
