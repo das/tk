@@ -64,19 +64,31 @@ TkSelGetSelection(
         /* 
          * Get the scrap from the Macintosh global clipboard.
          */
-        if ((err=GetCurrentScrap(&scrapRef))!=noErr) {
-            fprintf(stderr,"GetCurrentScrap failed,%d\n", err );
+         
+        err=GetCurrentScrap(&scrapRef);
+        if (err != noErr) {
+            Tcl_AppendResult(interp, Tk_GetAtomName(tkwin, selection),
+                " GetCurrentScrap failed.", (char *) NULL);
             return TCL_ERROR;
         }
-        if ((err=GetScrapFlavorSize(scrapRef,'TEXT',&length))!= noErr) {
-            fprintf(stderr,"GetScrapFlavorSize failed, %d\n", err );
+        
+        err=GetScrapFlavorSize(scrapRef,'TEXT',&length);
+        if (err != noErr) {
+            Tcl_AppendResult(interp, Tk_GetAtomName(tkwin, selection),
+                " GetScrapFlavorSize failed.", (char *) NULL);
             return TCL_ERROR;
         }
         if (length > 0) {
             Tcl_DString encodedText;
 
             buf = (char *)ckalloc(length+1);
-            buf[length] = 0;
+	    buf[length] = 0;
+	    err = GetScrapFlavorData(scrapRef, 'TEXT', &length, buf);
+            if (err != noErr) {
+                    Tcl_AppendResult(interp, Tk_GetAtomName(tkwin, selection),
+                        " GetScrapFlavorData failed.", (char *) NULL);
+                    return TCL_ERROR;
+            }
 
             Tcl_ExternalToUtfDString(NULL, buf, length, &encodedText);
             result = (*proc)(clientData, interp,
