@@ -56,6 +56,14 @@ If an application sets it to one, then Tk attempts to adhere as
 closely as possible to Motif look-and-feel standards.
 For example, active elements such as buttons and scrollbar
 sliders will not change color when the pointer passes over them.
+.TP
+\fBtk_textRedraw\fR
+.TP
+\fBtk_textRelayout\fR
+These variables are set by text widgets when they have debugging
+turned on.  The values written to these variables can be used to
+test or debug text widget operations.  These variables are mostly
+used by Tk's test suite.
 .TP 15
 \fBtk_version\fR
 Tk sets this variable in the interpreter for each application.
@@ -69,4 +77,4 @@ each new release of Tk, except that it resets to zero whenever the
 major version number changes.
 
 .SH KEYWORDS
-variables, version
+variables, version, text
