@@ -1,26 +1,22 @@
-2005-01-03  Jeff Hobbs  <jeffh@ActiveState.com>
+2005-01-03 Chengye Mao <chengye.geo@yahoo.com>
 
-	* win/tkWinWm.c (TkWinWmCleanup): clean up layered window class.
-	This caused crash in reinit of Tk (as seen in plugin).
+	*** created 8-4-9-branch ***
+	Changes were made for bug fix (crashes/panics in finalization/exit)
+	and feature implementation (embedding/embedded Tk (Windows)) to 
+	the following files:
 
-2004-12-29  Jeff Hobbs  <jeffh@ActiveState.com>
+	* generic/tkFrame.c
+	* generic/tkIntPlatDecls.h
+	* generic/tkPlatDecls.h
+	* generic/tkStubInit.c
+	* generic/tkWindow.c
+	* win/tkWin.h
+	* win/tkWinEmbed.c
+	* win/tkWinInt.h
+	* win/tkWinMenu.c
+	* win/tkWinX.c
 
-	* win/tcl.m4, win/configure: update MSVC CFLAGS_OPT to -O2, remove
-	-Gs (included in -O2) and -GD (outdated).  Use "link -lib" instead
-	of "lib" binary and remove -YX for MSVC7 portability.  Add
-	-fomit-frame-pointer for gcc OPT compiles. [Bug 1092952, 1091967]
-
-2004-12-20  Donal K. Fellows  <donal.k.fellows@man.ac.uk>
-
-	* doc/panedwindow.n: Fix silly typo. [Bug 1087842]
-
-2004-12-09  Donal K. Fellows  <donal.k.fellows@man.ac.uk>
-
-	* generic/tkImgPhoto.c (Tk_PhotoPutBlock, Tk_PhotoPutZoomedBlock):
-	Added guards so that rescanning for the complex-alpha check is not
-	done in the common case of creating a simple image a bit at a
-	time, or any other time where the image was simple before and the
-	input data has no alpha channel. [Bug 1081966]
+	For details see Tk 8.5 changes (2004-12-17 to 2005-01-03)
 
 2004-12-06  Jeff Hobbs  <jeffh@ActiveState.com>
 
