@@ -711,6 +711,10 @@ extern int			tkSendSerial;
 # define TCL_STORAGE_CLASS DLLEXPORT
 #endif
 
+int	TkConsoleInit _ANSI_ARGS_((Tcl_Interp *interp));
+void	TkConsolePrint _ANSI_ARGS_((Tcl_Interp *interp,
+			    int devId, char *buffer, long size));
+
 /*
  * For backwards compatibility, need the tkIntPlatDecls.h here for
  * windows & mac X wrappers.

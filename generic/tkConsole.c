@@ -14,6 +14,7 @@
  */
 
 #include "tk.h"
+#include "tkInt.h"
 #include <string.h>
 
 /*
@@ -167,6 +168,7 @@ TkConsoleInit(interp)
 #endif
     
     consoleInterp = Tcl_CreateInterp();
+    
     if (consoleInterp == NULL) {
 	goto error;
     }

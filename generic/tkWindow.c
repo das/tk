@@ -2835,7 +2835,7 @@ Initialize(interp)
      * Provide Tk and its stub table.
      */
 
-    code = Tcl_PkgProvide(interp, "Tk", TK_VERSION, (ClientData) tkStubsPtr);
+    code = Tcl_PkgProvideEx(interp, "Tk", TK_VERSION, (ClientData) tkStubsPtr);
     if (code != TCL_OK) {
 	goto done;
     }

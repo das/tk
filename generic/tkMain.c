@@ -21,6 +21,7 @@
 #include <string.h>
 #include <tcl.h>
 #include <tk.h>
+#include "tkInt.h"
 #ifdef NO_STDLIB_H
 #   include "../compat/stdlib.h"
 #else
@@ -36,8 +37,10 @@
  * some systems.
  */
 
-extern int		isatty _ANSI_ARGS_((int fd));
+void	TkConsoleCreate_ _ANSI_ARGS_((void));
+
 #if !defined(__WIN32__) && !defined(_WIN32)
+extern int		isatty _ANSI_ARGS_((int fd));
 extern char *		strrchr _ANSI_ARGS_((CONST char *string, int c));
 #endif
 extern void		TkpDisplayWarning _ANSI_ARGS_((char *msg,
@@ -92,7 +95,7 @@ Tk_Main(argc, argv, appInitProc)
 					 * initialization but before starting
 					 * to execute commands. */
 {
-    TkMain(argc, argv, appInitProc, Tcl_CreateInterp());
+    Tk_MainEx(argc, argv, appInitProc, Tcl_CreateInterp());
 }
 
 void
@@ -113,10 +116,10 @@ Tk_MainEx(argc, argv, appInitProc, interp)
 
     /*
      * Make sure that Tcl is present. If using stubs this will initialize the
-     * stub table pointers.
+     * stub table pointers.  (for 8.1, noop in 8.0.x)
      */
 
-    if (Tcl_Required (interp, NULL, 0) == NULL) {
+    if (Tcl_InitStubs(interp, TCL_VERSION, 1) == NULL) {
 	abort();
     }
     
