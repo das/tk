@@ -1405,9 +1405,17 @@ TkpPostMenu(
 	    TkMacHandleTearoffMenu();
 	    result = TCL_OK;
 	}
-	InvalidateMDEFRgns();
-	RecursivelyClearActiveMenu(menuPtr);
 	
+        /*
+         * Be careful, here.  The command executed in handling the menu event
+         * could destroy the window.  Don't try to do anything with it then.
+         */
+        
+        if (menuPtr->tkwin) {
+	    InvalidateMDEFRgns();
+	    RecursivelyClearActiveMenu(menuPtr);
+	}
+
 	inPostMenu--;
     }
     return result;

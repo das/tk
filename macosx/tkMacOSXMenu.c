@@ -642,14 +642,16 @@ TkpDestroyMenu(
     }
     if (menuPtr->platformData != NULL) {
         MenuID menuID;
-	DeleteMenu(menuID=GetMenuID(macMenuHdl));
-	TkMacOSXFreeMenuID(menuID);
-	DisposeMenu(macMenuHdl);
-	ckfree((char *) menuPtr->platformData);
+        menuID = GetMenuID(macMenuHdl);
+        DeleteMenu(menuID);
+        TkMacOSXFreeMenuID(menuID);
+        DisposeMenu(macMenuHdl);
+        ckfree((char *) menuPtr->platformData);
 	menuPtr->platformData = NULL;
     }
 }
-
+
+
 /*
  *----------------------------------------------------------------------
  *
@@ -1363,9 +1365,16 @@ TkpPostMenu(
 	    TkMacOSXHandleTearoffMenu();
 	    result = TCL_OK;
 	}
-	InvalidateMDEFRgns();
-	RecursivelyClearActiveMenu(menuPtr);
-	
+
+        /*
+         * Be careful, here.  The command executed in handling the menu event
+         * could destroy the window.  Don't try to do anything with it then.
+         */
+        
+        if (menuPtr->tkwin) {
+	    InvalidateMDEFRgns();
+	    RecursivelyClearActiveMenu(menuPtr);
+        }
 	inPostMenu--;
     }
     return result;
