@@ -326,6 +326,7 @@ TkWinXCleanup(clientData)
      */
     
     TkWinWmCleanup(hInstance);
+    TkWinCleanupContainerList();
 }
 
 /*
@@ -822,6 +823,14 @@ TkWinChildProc(hwnd, message, wParam, lParam)
 	case TK_GEOMETRYREQ:
 	case TK_ATTACHWINDOW:
 	case TK_DETACHWINDOW:
+	case TK_ICONIFY:
+	case TK_DEICONIFY:
+	case TK_MOVEWINDOW:
+	case TK_WITHDRAW:
+	case TK_RAISEWINDOW:
+	case TK_GETFRAMEWID:
+	case TK_OVERRIDEREDIRECT:
+	case TK_SETMENU:
 	    result =  TkWinEmbeddedEventProc(hwnd, message, wParam, lParam);
 	    break;
 
@@ -898,6 +907,10 @@ Tk_TranslateWinEvent(hwnd, message, wParam, lParam, resultPtr)
 
 	case WM_LBUTTONDOWN:
 	case WM_LBUTTONDBLCLK:
+	    Tk_PointerEvent(hwnd, (short) LOWORD(lParam),
+		    (short) HIWORD(lParam));
+	    return 1;
+
 	case WM_MBUTTONDOWN:
 	case WM_MBUTTONDBLCLK:
 	case WM_RBUTTONDOWN:

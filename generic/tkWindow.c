@@ -355,12 +355,6 @@ CreateTopLevelWindow(interp, parent, name, screenName, flags)
 	Tk_CreatePhotoImageFormat(&tkImgFmtGIF);
 	Tk_CreatePhotoImageFormat(&tkImgFmtPPM);
 
-	/*
-	 * Create exit handler to delete all windows when the application
-	 * exits.
-	 */
-
-	TkCreateExitHandler(DeleteWindowsExitProc, (ClientData) tsdPtr);
     }
 
     if ((parent != NULL) && (screenName != NULL) && (screenName[0] == '\0')) {
@@ -3161,6 +3155,16 @@ Initialize(interp)
      */
 
     code = TkpInit(interp);
+    if(code != TCL_OK) {
+	goto done;
+    }
+
+    /*
+     * Create exit handler to delete all windows when the application
+     * exits.
+     */
+
+    TkCreateExitHandler(DeleteWindowsExitProc, (ClientData) tsdPtr);
 
     done:
     if (argv != NULL) {

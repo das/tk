@@ -372,6 +372,7 @@ TkIntPlatStubs tkIntPlatStubs = {
     TkWinGetPlatformId, /* 33 */
     TkWinSetHINSTANCE, /* 34 */
     TkWinGetPlatformTheme, /* 35 */
+    TkWinCleanupContainerList, /* 36 */
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
     TkGenerateActivateEvents, /* 0 */
@@ -825,6 +826,8 @@ TkPlatStubs tkPlatStubs = {
     Tk_HWNDToWindow, /* 3 */
     Tk_PointerEvent, /* 4 */
     Tk_TranslateWinEvent, /* 5 */
+    Tk_GetMenuHWND, /* 6 */
+    Tk_GetEmbeddedMenuHWND, /* 7 */
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
     Tk_MacSetEmbedHandler, /* 0 */

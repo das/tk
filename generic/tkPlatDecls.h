@@ -47,6 +47,10 @@ EXTERN void		Tk_PointerEvent _ANSI_ARGS_((HWND hwnd, int x, int y));
 EXTERN int		Tk_TranslateWinEvent _ANSI_ARGS_((HWND hwnd, 
 				UINT message, WPARAM wParam, LPARAM lParam, 
 				LRESULT * result));
+/* 6 */
+EXTERN HWND		Tk_GetMenuHWND _ANSI_ARGS_((Tk_Window tkwin));
+/* 7 */
+EXTERN HWND		Tk_GetEmbeddedMenuHWND _ANSI_ARGS_((Tk_Window tkwin));
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
 /* 0 */
@@ -128,6 +132,8 @@ typedef struct TkPlatStubs {
     Tk_Window (*tk_HWNDToWindow) _ANSI_ARGS_((HWND hwnd)); /* 3 */
     void (*tk_PointerEvent) _ANSI_ARGS_((HWND hwnd, int x, int y)); /* 4 */
     int (*tk_TranslateWinEvent) _ANSI_ARGS_((HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam, LRESULT * result)); /* 5 */
+    HWND (*tk_GetMenuHWND) _ANSI_ARGS_((Tk_Window tkwin)); /* 6 */
+    HWND (*tk_GetEmbeddedMenuHWND) _ANSI_ARGS_((Tk_Window tkwin)); /* 6 */
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
     void (*tk_MacSetEmbedHandler) _ANSI_ARGS_((Tk_MacEmbedRegisterWinProc * registerWinProcPtr, Tk_MacEmbedGetGrafPortProc * getPortProcPtr, Tk_MacEmbedMakeContainerExistProc * containerExistProcPtr, Tk_MacEmbedGetClipProc * getClipProc, Tk_MacEmbedGetOffsetInParentProc * getOffsetProc)); /* 0 */
@@ -195,6 +201,14 @@ extern TkPlatStubs *tkPlatStubsPtr;
 #ifndef Tk_TranslateWinEvent
 #define Tk_TranslateWinEvent \
 	(tkPlatStubsPtr->tk_TranslateWinEvent) /* 5 */
+#endif
+#ifndef Tk_GetMenuHWND
+#define Tk_GetMenuHWND \
+	(tkPlatStubsPtr->tk_GetMenuHWND) /* 6 */
+#endif
+#ifndef Tk_GetEmbeddedMenuHWND
+#define Tk_GetEmbeddedMenuHWND \
+	(tkPlatStubsPtr->tk_GetEmbeddedMenuHWND) /* 7 */
 #endif
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
