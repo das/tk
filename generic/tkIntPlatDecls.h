@@ -127,6 +127,8 @@ EXTERN void		TkWinSetHINSTANCE _ANSI_ARGS_((HINSTANCE hInstance));
 EXTERN int		TkWinGetPlatformTheme _ANSI_ARGS_((void));
 /* 36 */
 EXTERN void		TkWinCleanupContainerList _ANSI_ARGS_((void));
+/* 37 */
+EXTERN int		TkpWmGetState _ANSI_ARGS_((TkWindow * winPtr));
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
 /* 0 */
@@ -468,6 +470,7 @@ typedef struct TkIntPlatStubs {
     void (*tkWinSetHINSTANCE) _ANSI_ARGS_((HINSTANCE hInstance)); /* 34 */
     int (*tkWinGetPlatformTheme) _ANSI_ARGS_((void)); /* 35 */
     void (*tkWinCleanupContainerList) _ANSI_ARGS_((void)); /* 36 */
+    int (*tkpWmGetState) _ANSI_ARGS_((TkWindow * winPtr)); /* 37 */
 #endif /* __WIN32__ */
 #ifdef MAC_TCL
     void (*tkGenerateActivateEvents) _ANSI_ARGS_((TkWindow * winPtr, int active)); /* 0 */
@@ -770,6 +773,10 @@ extern TkIntPlatStubs *tkIntPlatStubsPtr;
 #ifndef TkWinCleanupContainerList
 #define TkWinCleanupContainerList \
 	(tkIntPlatStubsPtr->tkWinCleanupContainerList) /* 36 */
+#endif
+#ifndef TkpWmGetState
+#define TkpWmGetState \
+	(tkIntPlatStubsPtr->tkpWmGetState) /* 37 */
 #endif
 #endif /* __WIN32__ */
 #ifdef MAC_TCL

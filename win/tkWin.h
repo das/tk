@@ -48,7 +48,16 @@
 #define TK_WITHDRAW	    (WM_USER+8)	    /* an embedded window requests to withdraw */
 #define TK_GETFRAMEWID	    (WM_USER+9)	    /* an embedded window requests a frame window id */
 #define TK_OVERRIDEREDIRECT (WM_USER+10)    /* an embedded window requests to overrideredirect */
-#define TK_SETMENU	    (WM_USER+11)    /* am embedded widnow requests to set menu */
+#define TK_SETMENU	    (WM_USER+11)    /* an embedded widnow requests to set menu */
+#define TK_STATE	    (WM_USER+12)    /* an embedded window sets/gets state */
+#define TK_INFO		    (WM_USER+13)    /* an embedded window requests a container's info */
+
+/*
+ * The following are sub-messages (wParam) for TK_INFO 
+ */
+#define TK_CONTAINER_VERIFY	    0x01
+#define TK_CONTAINER_ISAVAILABLE    0x02
+
 
 /*
  *--------------------------------------------------------------

@@ -243,7 +243,8 @@ TkpUseWindow(
     int result;
 
     if (winPtr->window != None) {
-	panic("TkpUseWindow: X window already assigned");
+	Tcl_AppendResult(interp, "can't modify container after widget is created", (char *) NULL);
+	return TCL_ERROR;
     }
     
     /*
