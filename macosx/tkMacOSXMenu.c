@@ -1079,8 +1079,14 @@ ReconfigureIndividualMenu(
             cf = CFStringCreateWithCString(NULL,
                   Tcl_DStringValue(&itemTextDString), kCFStringEncodingUTF8);
 	    AppendMenu(macMenuHdl, "\px");
-            SetMenuItemTextWithCFString(macMenuHdl, base + index, cf);
-            CFRelease(cf);
+	    if (cf != NULL) {
+	      SetMenuItemTextWithCFString(macMenuHdl, base + index, cf);
+	      CFRelease(cf);
+	    } else {
+	      cf = CFSTR ("<Error>");
+	      SetMenuItemTextWithCFString(macMenuHdl, base + index, cf);
+	    }
+	      
 	    Tcl_DStringFree(&itemTextDString);
 	
     	    /*
