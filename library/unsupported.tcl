@@ -229,7 +229,7 @@ namespace eval ::tk::unsupported {
 
     variable PrivateVariables
     array set PrivateVariables {
-	histNum			::tk::histNum
+	histNum			::tk::HistNum
 	tkFocusIn		::tk::FocusIn
 	tkFocusOut		::tk::FocusOut
 	tkPalette		::tk::Palette
