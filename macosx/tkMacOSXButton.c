@@ -953,12 +953,17 @@ TkMacOSXDrawControl(
         int        len;
         
         len = Tk_GetFirstTextLayout(butPtr->textLayout, 
-                &font, controlTitle + 1);
-        controlTitle[len + 1] = 0;
-        controlTitle[0] = len;
-        if (bcmp(mbPtr->controlTitle, controlTitle, len+2)) {
-            SetControlTitle(mbPtr->control, controlTitle);
-            bcopy(controlTitle, mbPtr->controlTitle, len+2);
+                &font, controlTitle);
+        controlTitle[len] = 0;
+        if (bcmp(mbPtr->controlTitle, controlTitle, len+1)) {
+            CFStringRef cf;    	    
+            cf = CFStringCreateWithCString(NULL,
+                  controlTitle, kCFStringEncodingMacRoman);
+            if (cf != NULL) {
+            SetControlTitleWithCFString(mbPtr->control, cf);
+            CFRelease(cf);
+            }
+            bcopy(controlTitle, mbPtr->controlTitle, len+1);
         }
         if (len) {
             TkMacOSXInitControlFontStyle(font, &fontStyle);
