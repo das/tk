@@ -80,6 +80,7 @@ main(argc, argv)
                        * Variable used to take care of
                        * lazy font initialization
                        */
+    CFBundleRef bundleRef;
 
     /*
      * The following #if block allows you to change the AppInit
@@ -124,41 +125,34 @@ main(argc, argv)
      * the auto_path.  If we don't find the startup script, we just bag
      * it, assuming the user is starting up some other way.
      */
-     
-    if (argc == 1) {
-        CFBundleRef bundleRef;
-        bundleRef = CFBundleGetMainBundle();
-        if (bundleRef != NULL) {
-            CFURLRef appMainURL;
-            appMainURL = CFBundleCopyResourceURL(bundleRef, 
-                    CFSTR("AppMain"), 
-                    CFSTR("tcl"), 
-                    CFSTR("Scripts"));
+    
+    bundleRef = CFBundleGetMainBundle();
+    
+    if (bundleRef != NULL) {
+        CFURLRef appMainURL;
+        appMainURL = CFBundleCopyResourceURL(bundleRef, 
+                CFSTR("AppMain"), 
+                CFSTR("tcl"), 
+                CFSTR("Scripts"));
 
-            if (appMainURL != NULL) {
-                CFURLRef scriptFldrURL;
-                char *argv1 = malloc(MAX_PATH_LEN + 1);
-                                
-                if (CFURLGetFileSystemRepresentation (appMainURL, true,
-                        argv1, MAX_PATH_LEN)) {
-                    char *tmpArg0 = argv[0];
-                    argv = (char **) malloc(2*sizeof(char *));
-                    argv[0] = tmpArg0;
-                    argv[1] = argv1;
-                    argc = 2;
-                    
-                    scriptFldrURL = CFBundleCopyResourceURL(bundleRef,
-                            CFSTR("Scripts"),
-                            NULL,
-                            NULL);
-                    CFURLGetFileSystemRepresentation(scriptFldrURL, 
-                            true, scriptPath, MAX_PATH_LEN);
-                    CFRelease(scriptFldrURL);
-                } else {
-                    free(argv1);
-                }
-                CFRelease(appMainURL);
+        if (appMainURL != NULL) {
+            CFURLRef scriptFldrURL;
+            char *startupScript = malloc(MAX_PATH_LEN + 1);
+                            
+            if (CFURLGetFileSystemRepresentation (appMainURL, true,
+                    startupScript, MAX_PATH_LEN)) {
+                TclSetStartupScriptFileName(startupScript);
+                scriptFldrURL = CFBundleCopyResourceURL(bundleRef,
+                        CFSTR("Scripts"),
+                        NULL,
+                        NULL);
+                CFURLGetFileSystemRepresentation(scriptFldrURL, 
+                        true, scriptPath, MAX_PATH_LEN);
+                CFRelease(scriptFldrURL);
+            } else {
+                free(startupScript);
             }
+            CFRelease(appMainURL);
         }
     }
 
