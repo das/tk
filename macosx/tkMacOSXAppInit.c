@@ -26,9 +26,6 @@
     #define MAX_PATH_LEN 1024
 #endif
 
-extern void TkMacOSXInitAppleEvents(Tcl_Interp *interp);
-extern void TkMacOSXInitMenus(Tcl_Interp *interp);
-
 /*
  * The following variable is a special hack that is needed in order for
  * Sun shared libraries to be used for Tcl.
@@ -94,16 +91,7 @@ main(argc, argv)
 #endif
     extern int TK_LOCAL_APPINIT _ANSI_ARGS_((Tcl_Interp *interp));
 
-
-    /*
-     * NB - You have to swap in the Tk Notifier BEFORE you start up the
-     * Tcl interpreter for now.  It probably should work to do this
-     * in the other order, but for now it doesn't seem to.
-     */
-     
     scriptPath[0] = '\0';
-    
-    Tk_MacOSXSetupTkNotifier();
 
     /*
      * The following #if block allows you to change how Tcl finds the startup
@@ -245,9 +233,6 @@ Tcl_AppInit(interp)
         Tcl_SetVar(interp, "auto_path", scriptPath,
                 TCL_GLOBAL_ONLY|TCL_LIST_ELEMENT|TCL_APPEND_VALUE);
     }
-    
-    TkMacOSXInitAppleEvents(interp);
-    TkMacOSXInitMenus(interp);
     
 #ifdef TK_TEST
     if (Tcltest_Init(interp) == TCL_ERROR) {

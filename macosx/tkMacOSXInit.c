@@ -47,8 +47,21 @@ TkpInit(interp)
 {
     char tkLibPath[1024];
     int result;
-    
-    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", "aqua", TCL_GLOBAL_ONLY);
+    static int menusInitialized = false;
+
+    /* Since it is possible for TkInit to be called multiple times
+     * and we don't want to do the menu initialization multiple times
+     * we protect against doing it more than once.
+     */
+
+    if (menusInitialized == false) {
+    	menusInitialized = true;
+        Tk_MacOSXSetupTkNotifier();
+        TkMacOSXInitAppleEvents(interp);
+        TkMacOSXInitMenus(interp);
+    }
+    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", 
+            "aqua", TCL_GLOBAL_ONLY);
     
     /*
      * When Tk is in a framework, force tcl_findLibrary to look in the 
