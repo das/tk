@@ -923,7 +923,7 @@ OpenFileFilterProc(
     NavFilterModes filterMode )
 {
     OpenFileData *ofdPtr = (OpenFileData *) callBackUD;
-    if (!ofdPtr->usePopup) {
+    if (!ofdPtr || !ofdPtr->usePopup) {
         return true;
     } else {
         if (ofdPtr->fl.numFilters == 0) {
