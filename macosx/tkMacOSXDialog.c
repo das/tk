@@ -777,7 +777,14 @@ NavServicesGetFile(
         diagOptions.optionFlags += kNavNoTypePopup; 
         diagOptions.popupExtension = NULL;
     }
-        
+
+    /*
+     * This is required to allow App packages to be selectable in the
+     * file dialogs...
+     */
+    
+    diagOptions.optionFlags += kNavSupportPackages;
+    
     diagOptions.clientName = CFStringCreateWithCString(NULL, "Wish", encoding);
     if (message == NULL) {
         diagOptions.message = NULL;
