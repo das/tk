@@ -1491,9 +1491,8 @@ PolygonToArea(canvas, itemPtr, rectPtr)
      */
     inside = TkPolygonToArea(polyPoints, numPoints, rectPtr);
     if (inside==0) goto donearea;
-	    
-    if (polyPtr->outline.gc == None) goto donearea ;
 
+    if (polyPtr->outline.gc == None) goto donearea ;
 
     /*
      * Iterate through all of the edges of the line, computing a polygon
