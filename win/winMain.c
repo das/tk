@@ -23,7 +23,6 @@
  * interfaces are available for use, but are not supported.
  */
 
-EXTERN void		TkConsoleCreate(void);
 EXTERN int		TkConsoleInit(Tcl_Interp *interp);
 
 /*
@@ -84,14 +83,6 @@ WinMain(hInstance, hPrevInstance, lpszCmdLine, nCmdShow)
      * the queue.
      */
     SetMessageQueue(64);
-
-    /*
-     * Create the console channels and install them as the standard
-     * channels.  All I/O will be discarded until TkConsoleInit is
-     * called to attach the console to a text widget.
-     */
-
-    TkConsoleCreate();
 
     setargv(&argc, &argv);
 

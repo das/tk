@@ -124,7 +124,7 @@ Tk_MainEx(argc, argv, appInitProc, interp)
 
 
 #if (defined(__WIN32__) || defined(MAC_TCL))
-    TkConsoleCreate();
+    TkConsoleCreate_();
 #endif
     
 #ifdef TCL_MEM_DEBUG
