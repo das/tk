@@ -195,8 +195,8 @@ Tcl_AppInit(interp)
     char tclLibPath[MAX_PATH_LEN], tkLibPath[MAX_PATH_LEN];
     Tcl_Obj *pathPtr;
     
-    Tk_MacOSXOpenBundleResources (interp, "com.tcltk.tcllibrary", 
-        tclLibPath, MAX_PATH_LEN, 0);
+    Tcl_MacOSXOpenBundleResources (interp, "com.tcltk.tcllibrary", 
+        0, MAX_PATH_LEN, tclLibPath);
 
     if (tclLibPath[0] != '\0') {
         Tcl_SetVar(interp, "tcl_library", tclLibPath, TCL_GLOBAL_ONLY);
@@ -209,8 +209,8 @@ Tcl_AppInit(interp)
         return TCL_ERROR;
     }    
 
-    Tk_MacOSXOpenBundleResources (interp, "com.tcltk.tklibrary", 
-            tkLibPath, MAX_PATH_LEN, 1);
+    Tcl_MacOSXOpenBundleResources (interp, "com.tcltk.tklibrary", 
+            1, MAX_PATH_LEN, tkLibPath);
 
     /* 
      * FIXME: This is currently a hack...  I set the tcl_library, and
@@ -223,7 +223,7 @@ Tcl_AppInit(interp)
     if (tclLibPath[0] != '\0') {
         pathPtr = Tcl_NewStringObj(tclLibPath, -1);
     } else {
-        Tcl_Obj *pathPtr = TclGetLibraryPath();
+        pathPtr = TclGetLibraryPath();
     }
 
     if (tkLibPath[0] != '\0') {
