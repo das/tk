@@ -14,7 +14,7 @@
 
 #include <tkInt.h>
 
-#if !defined(MAC_TCL) && !(defined(MAC_TCL)
+#if !defined(MAC_TCL) && !defined(MAC_OSX_TK)
 #	include <X11/Xlib.h>
 #endif
 #ifdef MAC_TCL
