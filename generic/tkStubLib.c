@@ -13,6 +13,14 @@
  * RCS: @(#) $Id$
  */
 
+
+/*
+ * We need to ensure that we use the stub macros so that this file contains
+ * no references to any of the stub functions.  This will make it possible
+ * to build an extension that references Tk_InitStubs but doesn't end up
+ * including the rest of the stub functions.
+ */
+
 /*
  * Because of problems with pre-compiled headers on the Mac, we need to
  * do these includes before we add the stubs defines.  This a hack.
@@ -23,14 +31,7 @@
 
 #include "tkInt.h"
 #include "tkPort.h"
-#endif /* MAC_TCL */
-
-/*
- * We need to ensure that we use the stub macros so that this file contains
- * no references to any of the stub functions.  This will make it possible
- * to build an extension that references Tk_InitStubs but doesn't end up
- * including the rest of the stub functions.
- */
+#endif /* MAC_OSX_TK */
 
 #ifndef USE_TCL_STUBS
 #define USE_TCL_STUBS

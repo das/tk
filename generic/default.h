@@ -23,7 +23,7 @@
 #   if defined(MAC_OSX_TK)
 #	include "tkMacOSXDefault.h"
 #   elif defined(MAC_TCL)
-#       include "tkMacDefault.h"
+#	include "tkMacDefault.h"
 #   else
 #	include "tkUnixDefault.h"
 #   endif

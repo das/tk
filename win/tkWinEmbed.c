@@ -110,7 +110,7 @@ TkpTestembedCmd(clientData, interp, argc, argv)
     ClientData clientData;
     Tcl_Interp *interp;
     int argc;
-    char **argv;
+    CONST char **argv;
 {
     return TCL_OK;
 }
@@ -144,7 +144,7 @@ TkpUseWindow(interp, tkwin, string)
 				 * if string is bogus. */
     Tk_Window tkwin;		/* Tk window that does not yet have an
 				 * associated X window. */
-    char *string;		/* String identifying an X window to use
+    CONST char *string;		/* String identifying an X window to use
 				 * for tkwin;  must be an integer value. */
 {
     TkWindow *winPtr = (TkWindow *) tkwin;
@@ -638,10 +638,12 @@ EmbedWindowDeleted(winPtr)
      * Find the Container structure for this window work.  Delete the
      * information about the embedded application and free the container's
      * record.
+     * The main container may be null. [Bug #476176]
      */
 
     prevPtr = NULL;
     containerPtr = tsdPtr->firstContainerPtr;
+    if (containerPtr == NULL) return;
     while (1) {
 	if (containerPtr->embeddedPtr == winPtr) {
 	    containerPtr->embeddedHWnd = NULL;

@@ -220,3 +220,33 @@ TkClipBox(
     rect_return->width = rect.right-rect.left;
     rect_return->height = rect.bottom-rect.top;
 }
+
+/*
+ *----------------------------------------------------------------------
+ *
+ * TkSubtractRegion --
+ *
+ *	Implements the equivilent of the X window function
+ *	XSubtractRegion.  See X window documentation for more details.
+ *
+ * Results:
+ *	None.
+ *
+ * Side effects:
+ *	None.
+ *
+ *----------------------------------------------------------------------
+ */
+
+void 
+TkSubtractRegion(
+    TkRegion sra,
+    TkRegion srb,
+    TkRegion dr_return)
+{
+    RgnHandle srcRgnA = (RgnHandle) sra;
+    RgnHandle srcRgnB = (RgnHandle) srb;
+    RgnHandle destRgn = (RgnHandle) dr_return;
+
+    DiffRgn(srcRgnA, srcRgnB, destRgn);
+}

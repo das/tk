@@ -1240,16 +1240,15 @@ TkpSetWindowMenuBar(tkwin, menuPtr)
 	Tcl_SetHashValue(hashEntryPtr, (char *) menuPtr);
 	menuPtr->platformData = (TkMenuPlatformData) winMenuHdl;
 	TkWinSetMenu(tkwin, winMenuHdl);
-	if (menuPtr->menuFlags & MENU_RECONFIGURE_PENDING) {
-	    Tcl_DoWhenIdle(ReconfigureWindowsMenu, (ClientData) menuPtr);
+	if (!(menuPtr->menuFlags & MENU_RECONFIGURE_PENDING)) {
 	    menuPtr->menuFlags |= MENU_RECONFIGURE_PENDING;
+	    Tcl_DoWhenIdle(ReconfigureWindowsMenu, (ClientData) menuPtr);
 	}
     } else {
 	TkWinSetMenu(tkwin, NULL);
     }
 }
 
-
 /*
  *----------------------------------------------------------------------
  *
@@ -2744,8 +2743,8 @@ MenuExitHandler(
 Tcl_Obj *
 TkWinGetMenuSystemDefault(
     Tk_Window tkwin,		/* A window to use. */
-    char *dbName,		/* The option database name. */
-    char *className)		/* The name of the option class. */
+    CONST char *dbName,		/* The option database name. */
+    CONST char *className)	/* The name of the option class. */
 {
     Tcl_Obj *valuePtr = NULL;
 

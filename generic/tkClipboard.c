@@ -141,7 +141,7 @@ ClipboardAppHandler(clientData, offset, buffer, maxBytes)
 {
     TkDisplay *dispPtr = (TkDisplay *) clientData;
     size_t length;
-    char *p;
+    CONST char *p;
 
     p = dispPtr->clipboardAppPtr->winPtr->nameUid;
     length = strlen(p);
@@ -649,11 +649,9 @@ TkClipCleanup(dispPtr)
 		dispPtr->applicationAtom);
 	Tk_DeleteSelHandler(dispPtr->clipWindow, dispPtr->clipboardAtom,
 		dispPtr->windowAtom);
-	/*
-	 * It may be too late to call Tk_DestroyWindow, so just free the
-	 * memory created directly.
-	 */
-	ckfree((char *) dispPtr->clipWindow);
+
+	Tk_DestroyWindow(dispPtr->clipWindow);
+	Tcl_Release((ClientData) dispPtr->clipWindow);
 	dispPtr->clipWindow = NULL;
     }
 }
@@ -700,6 +698,7 @@ TkClipInit(interp, dispPtr)
     if (dispPtr->clipWindow == NULL) {
 	return TCL_ERROR;
     }
+    Tcl_Preserve((ClientData) dispPtr->clipWindow);
     atts.override_redirect = True;
     Tk_ChangeWindowAttributes(dispPtr->clipWindow, CWOverrideRedirect, &atts);
     Tk_MakeWindowExist(dispPtr->clipWindow);

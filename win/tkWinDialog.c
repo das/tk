@@ -20,15 +20,26 @@
 #include <cderr.h>      /* includes the common dialog error codes */
 
 /*
- * The new choose directory dialog is almost ready for prime time, but
- * it has a very long first load time that needs to be checked to see
- * if it can be sped up, as well as checked for cleanup. -- hobbs
- * See Patch #468139
- *
-#define USE_NEW_CHOOSEDIR 1
+ * This controls the use of the new style tk_chooseDirectory dialog.
  */
+#define USE_NEW_CHOOSEDIR 1
 #ifdef USE_NEW_CHOOSEDIR
 #include <shlobj.h>     /* includes SHBrowseForFolder */
+
+/* These needed for compilation with VC++ 5.2 */
+#ifndef BIF_EDITBOX
+#define BIF_EDITBOX 0x10
+#endif
+#ifndef BIF_VALIDATE
+#define BIF_VALIDATE 0x0020
+#endif
+#ifndef BFFM_VALIDATEFAILED
+#ifdef UNICODE
+#define BFFM_VALIDATEFAILED 4
+#else
+#define BFFM_VALIDATEFAILED 3
+#endif
+#endif 
 
 /*
  * The following structure is used by the new Tk_ChooseDirectoryObjCmd
@@ -1627,8 +1638,12 @@ New Behaviour:
   held open to allow further modification by the user.
 
 - Not sure how to implement localization of message prompts.
+
+- -title is really -message.
 ToDo:
 - Fix bugs.
+- test to see what platforms this really works on.  May require v4.71
+  of shell32.dll everywhere (what is standard?).
  *
  */
 int
@@ -1663,11 +1678,12 @@ Tk_ChooseDirectoryObjCmd(clientData, interp, objc, objv)
     /*
      * Initialize
      */
-    result                 = TCL_ERROR;
-    path[0]                = '\0';
+    result		= TCL_ERROR;
+    path[0]		= '\0';
+    utfTitle		= NULL;
 
     ZeroMemory(&cdCBData, sizeof(CHOOSEDIRDATA));
-    cdCBData.interp        = interp;
+    cdCBData.interp	= interp;
 
     tkwin = (Tk_Window) clientData;
     /*
