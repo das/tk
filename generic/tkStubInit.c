@@ -181,9 +181,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkClipBox, /* 113 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 113 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkClipBox, /* 113 */
 #endif /* MAC_OSX_TK */
@@ -196,9 +193,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkCreateRegion, /* 114 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 114 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkCreateRegion, /* 114 */
 #endif /* MAC_OSX_TK */
@@ -211,9 +205,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkDestroyRegion, /* 115 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 115 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkDestroyRegion, /* 115 */
 #endif /* MAC_OSX_TK */
@@ -226,9 +217,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkIntersectRegion, /* 116 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 116 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkIntersectRegion, /* 116 */
 #endif /* MAC_OSX_TK */
@@ -241,9 +229,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkRectInRegion, /* 117 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 117 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkRectInRegion, /* 117 */
 #endif /* MAC_OSX_TK */
@@ -256,9 +241,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkSetRegion, /* 118 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 118 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkSetRegion, /* 118 */
 #endif /* MAC_OSX_TK */
@@ -271,9 +253,6 @@ TkIntStubs tkIntStubs = {
 #ifdef MAC_TCL
     TkUnionRectWithRegion, /* 119 */
 #endif /* MAC_TCL */
-#ifdef MAC_OSX_TCL
-    NULL, /* 119 */
-#endif /* MAC_OSX_TCL */
 #ifdef MAC_OSX_TK
     TkUnionRectWithRegion, /* 119 */
 #endif /* MAC_OSX_TK */
@@ -945,9 +924,8 @@ TkPlatStubs tkPlatStubs = {
     TkMacOSXInvalClipRgns, /* 6 */
     TkMacOSXGetDrawablePort, /* 7 */
     TkMacOSXGetRootControl, /* 8 */
-    Tk_MacOSXOpenBundleResources, /* 9 */
-    Tk_MacOSXSetupTkNotifier, /* 10 */
-    Tk_MacOSXIsAppInFront, /* 11 */
+    Tk_MacOSXSetupTkNotifier, /* 9 */
+    Tk_MacOSXIsAppInFront, /* 10 */
 #endif /* MAC_OSX_TK */
 };
 

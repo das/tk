@@ -1290,17 +1290,9 @@ declare 8 aqua {
 }
 
 declare 9 aqua {
-    int Tk_MacOSXOpenBundleResources (Tcl_Interp *interp, \
-        char *bundleName, \
-        char *libraryPath, \
-        int  maxPathLen, \
-        int hasResourceFile)
-}
-
-declare 10 aqua {
     void Tk_MacOSXSetupTkNotifier (void)
 }
 
-declare 11 aqua {
+declare 10 aqua {
     int Tk_MacOSXIsAppInFront (void)
 }
