@@ -29,6 +29,12 @@
 #include "tkWin.h"
 #endif
 
+/*
+ * main header of speedup patch
+ */
+
+#include "tkWinGdi.h"
+
 #ifndef _TKPORT
 #include "tkPort.h"
 #endif
@@ -157,6 +163,15 @@ extern int tkpWinRopModes[];
 
 EXTERN LRESULT CALLBACK	TkWinChildProc _ANSI_ARGS_((HWND hwnd, UINT message,
 			    WPARAM wParam, LPARAM lParam));
+
+/*
+ * speedup patch related definitions
+ */
+#define FILLRECTGC
+#ifdef USE_CKGRAPH_IMP
+   extern int tkWinHashBrushs;
+   extern int tkWinHashPens;
+#endif /* USE_CKGRAPH_IMP */
 
 /*
  * Special proc needed as tsd accessor function between

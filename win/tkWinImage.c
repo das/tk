@@ -304,7 +304,7 @@ XGetImage(display, d, x, y, width, height, plane_mask, format)
 	    width, height, 32, 0);
     imagePtr->data = ckalloc(imagePtr->bytes_per_line * imagePtr->height);
 
-    dc = GetDC(NULL);
+    dc = TkWinGetNULLDC();
 
     GetDIBits(dc, twdPtr->bitmap.handle, 0, height, NULL,
 	    infoPtr, DIB_RGB_COLORS);
@@ -323,7 +323,7 @@ XGetImage(display, d, x, y, width, height, plane_mask, format)
 
     GetDIBits(dc, twdPtr->bitmap.handle, 0, height, imagePtr->data,
 	    infoPtr, DIB_RGB_COLORS);
-    ReleaseDC(NULL, dc);
+    TkWinReleaseNULLDC(dc);
 
     return imagePtr;
 }

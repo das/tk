@@ -1179,6 +1179,14 @@ declare 5 win {
 	    UINT message, WPARAM wParam, LPARAM lParam, LRESULT *result)
 }
 
+declare 10 win {
+    HWND TkWin_CreateDebugTerminal (char* name)
+}
+
+declare 11 win {
+    int TkWin_Init (Tcl_Interp* interp)
+}
+
 # Mac specific functions
 
 declare 0 mac {

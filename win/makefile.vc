@@ -171,6 +171,8 @@ TKOBJS = \
 	$(TMPDIR)\tkWinWindow.obj \
 	$(TMPDIR)\tkWinWm.obj \
 	$(TMPDIR)\tkWinX.obj \
+	$(TMPDIR)\tkWinGdi.obj \
+	$(TMPDIR)\tkWinUtil.obj \
 	$(TMPDIR)\stubs.obj \
 	$(TMPDIR)\tk3d.obj \
 	$(TMPDIR)\tkArgv.obj \

@@ -589,8 +589,8 @@ TkpDisplayButton(clientData)
 	    rect.right = x+butPtr->textWidth + 1;
 	    rect.bottom = y+butPtr->textHeight + 1;
 	}
-	SetTextColor(dc, gc->foreground);
-	SetBkColor(dc, gc->background);
+	CkSetTextColor(dc, gc->foreground);
+	CkSetBkColor(dc, gc->background);
 	DrawFocusRect(dc, &rect);
 	TkWinReleaseDrawableDC(pixmap, dc, &state);
     }
