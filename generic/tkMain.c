@@ -67,7 +67,7 @@ static void		StdinProc _ANSI_ARGS_((ClientData clientData,
 /*
  *----------------------------------------------------------------------
  *
- * Tk_Main --
+ * Tk_Main, Tk_MainEx --
  *
  *	Main program for Wish and most other Tk-based applications.
  *
@@ -92,14 +92,41 @@ Tk_Main(argc, argv, appInitProc)
 					 * initialization but before starting
 					 * to execute commands. */
 {
+    TkMain(argc, argv, appInitProc, Tcl_CreateInterp());
+}
+
+void
+Tk_MainEx(argc, argv, appInitProc, interp)
+    int argc;				/* Number of arguments. */
+    char **argv;			/* Array of argument strings. */
+    Tcl_AppInitProc *appInitProc;	/* Application-specific initialization
+					 * procedure to call after most
+					 * initialization but before starting
+					 * to execute commands. */
+    Tcl_Interp *interp;			/* Application interpreter. */
+{
     char *args, *fileName;
     char buf[20];
     int code;
     size_t length;
     Tcl_Channel inChannel, outChannel;
 
+    /*
+     * Make sure that Tcl is present. If using stubs this will initialize the
+     * stub table pointers.
+     */
+
+    if (Tcl_Required (interp, NULL, 0) == NULL) {
+	abort();
+    }
+    
     Tcl_FindExecutable(argv[0]);
-    interp = Tcl_CreateInterp();
+
+
+#if (defined(__WIN32__) || defined(MAC_TCL))
+    TkConsoleCreate();
+#endif
+    
 #ifdef TCL_MEM_DEBUG
     Tcl_InitMemory(interp);
 #endif

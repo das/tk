@@ -2613,6 +2613,15 @@ Initialize(interp)
     char buffer[30];
 
     /*
+     * Ensure that we are getting the matching version of Tcl.  This is
+     * really only an issue when Tk is loaded dynamically.
+     */
+
+    if (Tcl_InitStubs(interp, TCL_VERSION, 1) == NULL) {
+        return TCL_ERROR;
+    }
+    
+    /*
      * Start by initializing all the static variables to default acceptable
      * values so that no information is leaked from a previous run of this
      * code.
@@ -2821,7 +2830,12 @@ Initialize(interp)
 	code = TCL_ERROR;
 	goto done;
     }
-    code = Tcl_PkgProvide(interp, "Tk", TK_VERSION);
+
+    /*
+     * Provide Tk and its stub table.
+     */
+
+    code = Tcl_PkgProvide(interp, "Tk", TK_VERSION, (ClientData) tkStubsPtr);
     if (code != TCL_OK) {
 	goto done;
     }
