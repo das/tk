@@ -269,11 +269,15 @@ Tcl_AppInit(interp)
 #endif /* TK_TEST */
 
     /*
-     * This doesn't work yet, still this is roughly what we want to do...
+     * If we don't have a TTY, then use the Tk based console
+     * interpreter instead.
      */
 
     if (ttyname(0) == NULL) {
         Tk_InitConsoleChannels(interp);
+        Tcl_RegisterChannel(interp, Tcl_GetStdChannel(TCL_STDIN));
+        Tcl_RegisterChannel(interp, Tcl_GetStdChannel(TCL_STDOUT));
+        Tcl_RegisterChannel(interp, Tcl_GetStdChannel(TCL_STDERR));
         if (Tk_CreateConsoleWindow(interp) == TCL_ERROR) {
             goto error;
         }
