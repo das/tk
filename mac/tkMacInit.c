@@ -75,28 +75,20 @@ proc sourcePath {file} {\n\
   error $msg\n\
 }\n\
 sourcePath tk\n\
-sourcePath button\n\
 sourcePath dialog\n\
-sourcePath entry\n\
 sourcePath focus\n\
-sourcePath listbox\n\
-sourcePath menu\n\
 sourcePath optMenu\n\
 sourcePath palette\n\
-sourcePath scale\n\
-sourcePath scrlbar\n\
 sourcePath tearoff\n\
-sourcePath text\n\
+if {[catch {package require msgcat}]} {sourcePath msgcat}\n\
 sourcePath bgerror\n\
 sourcePath msgbox\n\
 sourcePath comdlg\n\
-sourcePath spinbox\n\
 rename sourcePath {}\n\
 rename tkInit {}\n\
 } }\n\
 tkInit";
 
-    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", "classic", TCL_GLOBAL_ONLY);
     Tcl_DStringInit(&path);
     Tcl_DStringInit(&ds);
 
@@ -122,11 +114,9 @@ tkInit";
 	    argv[1] = "Tool Command Language";	    
 	    Tcl_DStringInit(&libPath);
 	    Tcl_DStringAppend(&libPath, "tk", -1);
-	    Tcl_DStringAppend(&libPath, TK_VERSION, -1);
-	    argv[2] = Tcl_DStringValue(&libPath);
-	    Tcl_JoinPath(3, argv, &path);
+	    argv[2] = Tcl_DStringAppend(&libPath, TK_VERSION, -1);
+	    libDir = Tcl_JoinPath(3, argv, &path);
 	    Tcl_DStringFree(&libPath);
-	    libDir = Tcl_DStringValue(&path);
 	}
     }
     if (libDir == NULL) {

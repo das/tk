@@ -140,6 +140,13 @@ TkpOpenDisplay(
     screen->root_visual->map_entries = 2 ^ 8;
 
     gMacDisplay = (TkDisplay *) ckalloc(sizeof(TkDisplay));
+    
+    /*
+     * This is the quickest way to make sure that all the *Init
+     * flags get properly initialized
+     */
+    
+    bzero (gMacDisplay, sizeof (TkDisplay));
     gMacDisplay->display = display;
     return gMacDisplay;
 }

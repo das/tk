@@ -311,6 +311,9 @@ TkIntStubs tkIntStubs = {
     TkpInitKeymapInfo, /* 139 */
     TkPhotoGetValidRegion, /* 140 */
     TkWmStackorderToplevel, /* 141 */
+    TkFocusFree, /* 142 */
+    TkClipCleanup, /* 143 */
+    TkGCCleanup, /* 144 */
 };
 
 TkIntPlatStubs tkIntPlatStubs = {
@@ -326,6 +329,10 @@ TkIntPlatStubs tkIntPlatStubs = {
     TkUnixDoOneXEvent, /* 6 */
     TkUnixSetMenubar, /* 7 */
     TkpScanWindowId, /* 8 */
+    TkWmCleanup, /* 9 */
+    TkSendCleanup, /* 10 */
+    TkFreeXId, /* 11 */
+    TkpWmSetState, /* 12 */
 #endif /* UNIX */
 #ifdef __WIN32__
     TkAlignImageData, /* 0 */
@@ -1082,6 +1089,7 @@ TkStubs tkStubs = {
     Tk_SetClassProcs, /* 242 */
     Tk_SetInternalBorderEx, /* 243 */
     Tk_SetMinimumRequestSize, /* 244 */
+    Tk_SetCaretPos, /* 245 */
 };
 
 /* !END!: Do not edit above this line. */

@@ -67,6 +67,13 @@ extern int                Tktest_Init _ANSI_ARGS_((Tcl_Interp *interp));
  *----------------------------------------------------------------------
  */
 
+OSStatus
+myWindowHandler (EventHandlerCallRef inHandlerCallRef,
+                 EventRef inEvent, void *inUserData)
+{
+    return noErr;
+}
+
 int
 main(argc, argv)
     int argc;                        /* Number of command-line arguments. */
@@ -145,7 +152,6 @@ main(argc, argv)
     }
 
 #endif
-         
     textEncoding=GetApplicationTextEncoding();
     
     /*
@@ -155,7 +161,7 @@ main(argc, argv)
     Tk_Main(argc,argv,TK_LOCAL_APPINIT);
     return 0;                        /* Needed only to prevent compiler warning. */
 }
-
+
 /*
  *----------------------------------------------------------------------
  *
@@ -289,9 +295,26 @@ Tcl_AppInit(interp)
      
     Tcl_SetVar(interp, "tcl_rcFileName", "~/.wishrc", TCL_GLOBAL_ONLY);
 
+    {
+        Rect windowRect = {50, 50, 150, 150};
+        WindowRef windowRef;
+        EventTargetRef target;
+        struct EventTypeSpec myEventSpec = {kEventClassMouse, kEventMouseDown};
+        Boolean isValid;
+        OSStatus result;
+
+        CreateNewWindow (kDocumentWindowClass, kWindowStandardHandlerAttribute,
+                         &windowRect, &windowRef);
+        result = InstallStandardEventHandler (GetWindowEventTarget (windowRef));
+        result = InstallWindowEventHandler (windowRef, NewEventHandlerUPP (myWindowHandler),
+                                   1, &myEventSpec, NULL, NULL);
+        TransitionWindow(windowRef, kWindowZoomTransitionEffect, kWindowShowTransitionAction,
+                         NULL);
+
+    }
+
     return TCL_OK;
 
     error:
     return TCL_ERROR;
 }
-

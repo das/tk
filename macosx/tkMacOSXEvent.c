@@ -264,7 +264,7 @@ ReceiveAndProcessEvent()
             }
             
             err= SendEventToEventTarget(macEvent.eventRef,targetRef);
-            if (err != noErr) {
+            if (err != noErr /* && err != eventNotHandledErr */) {
                 fprintf(stderr,
                         "RCNE SendEventToEventTarget (%s) failed, %d\n",
                         CarbonEventToAscii(macEvent.eventRef,buf ),err);

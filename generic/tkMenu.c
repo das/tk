@@ -360,7 +360,7 @@ static void		MenuCmdDeletedProc _ANSI_ARGS_((
 static TkMenuEntry *	MenuNewEntry _ANSI_ARGS_((TkMenu *menuPtr, int index,
 			    int type));
 static char *		MenuVarProc _ANSI_ARGS_((ClientData clientData,
-			    Tcl_Interp *interp, char *name1, char *name2,
+			    Tcl_Interp *interp, char *name1, CONST char *name2,
 			    int flags));
 static int		MenuWidgetObjCmd _ANSI_ARGS_((ClientData clientData,
 			    Tcl_Interp *interp, int objc, 
@@ -1536,6 +1536,11 @@ ConfigureMenu(interp, menuPtr, objc, objv)
 		ckfree((char *) cleanupPtr->errorStructPtr);
 		cleanupPtr->errorStructPtr = NULL;
 	    }
+	    if (menuListPtr->errorStructPtr != NULL) {
+		Tk_RestoreSavedOptions(menuListPtr->errorStructPtr);
+		ckfree((char *) menuListPtr->errorStructPtr);
+		menuListPtr->errorStructPtr = NULL;
+	    }
 	    return TCL_ERROR;
 	}
 
@@ -1576,17 +1581,17 @@ ConfigureMenu(interp, menuPtr, objc, objv)
 	    if ((menuListPtr->numEntries == 0)
 		    || (menuListPtr->entries[0]->type != TEAROFF_ENTRY)) {
 		if (MenuNewEntry(menuListPtr, 0, TEAROFF_ENTRY) == NULL) {
-		    if (menuListPtr->errorStructPtr != NULL) {
-			for (cleanupPtr = menuPtr->masterMenuPtr;
-				cleanupPtr != menuListPtr;
-				cleanupPtr = cleanupPtr->nextInstancePtr) {
-			    Tk_RestoreSavedOptions(cleanupPtr->errorStructPtr);
-			    ckfree((char *) cleanupPtr->errorStructPtr);
-			    cleanupPtr->errorStructPtr = NULL;
-			}
+		    for (cleanupPtr = menuPtr->masterMenuPtr;
+			 cleanupPtr != menuListPtr;
+			 cleanupPtr = cleanupPtr->nextInstancePtr) {
 			Tk_RestoreSavedOptions(cleanupPtr->errorStructPtr);
 			ckfree((char *) cleanupPtr->errorStructPtr);
 			cleanupPtr->errorStructPtr = NULL;
+		    }
+		    if (menuListPtr->errorStructPtr != NULL) {
+			Tk_RestoreSavedOptions(menuListPtr->errorStructPtr);
+			ckfree((char *) menuListPtr->errorStructPtr);
+			menuListPtr->errorStructPtr = NULL;
 		    }
 		    return TCL_ERROR;
 		}
@@ -2464,7 +2469,7 @@ MenuVarProc(clientData, interp, name1, name2, flags)
     ClientData clientData;	/* Information about menu entry. */
     Tcl_Interp *interp;		/* Interpreter containing variable. */
     char *name1;		/* First part of variable's name. */
-    char *name2;		/* Second part of variable's name. */
+    CONST char *name2;		/* Second part of variable's name. */
     int flags;			/* Describes what just happened. */
 {
     TkMenuEntry *mePtr = (TkMenuEntry *) clientData;
