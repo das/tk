@@ -44,9 +44,9 @@ Contains a decimal integer giving the current patch level for Tk.
 The patch level is incremented for each new release or patch, and
 it uniquely identifies an official version of Tk.
 .TP
-\fBtkPriv\fR
+\fBtk::Priv\fR
 This variable is an array containing several pieces of information
-that are private to Tk.  The elements of \fBtkPriv\fR are used by
+that are private to Tk.  The elements of \fBtk::Priv\fR are used by
 Tk library procedures and default bindings.
 They should not be accessed by any code outside Tk.
 .TP
