@@ -17,6 +17,8 @@
 #include "X11/keysym.h"
 #include <Carbon/Carbon.h>
 
+extern Tcl_Encoding macRomanEncoding;
+
 typedef struct {
     short keycode;		/* Macintosh keycode */
     KeySym keysym;		/* X windows Keysym */
@@ -247,7 +249,7 @@ TkpGetString(
 	    len = 0;
 	}
     }
-    return Tcl_ExternalToUtfDString(NULL, string, len, dsPtr);
+    return Tcl_ExternalToUtfDString(macRomanEncoding, string, len, dsPtr);
 }
 
 /*

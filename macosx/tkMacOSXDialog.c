@@ -121,7 +121,6 @@ Tk_ChooseColorObjCmd(
     Tk_Window parent;
     char *title;
     int i, picked, srcRead, dstWrote;
-    OSErr err;
     ColorPickerInfo cpinfo;
     static int inited = 0;
     static RGBColor in;
@@ -906,6 +905,7 @@ NavServicesGetFile(
                                 pathValid = 1;
                             }
                             if (pathValid) {
+                                /* Tested this and NULL=utf-8 encoding is good here */
                                 Tcl_ExternalToUtfDString(NULL, pathPtr, -1, &fileName);
                                 if (multiple) {
                                     Tcl_ListObjAppendElement(interp, theResult, 

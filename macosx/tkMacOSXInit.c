@@ -22,6 +22,8 @@
  */
 #include "tkInitScript.h"
 
+Tcl_Encoding macRomanEncoding = NULL;
+
 
 /*
  *----------------------------------------------------------------------
@@ -49,6 +51,10 @@ TkpInit(interp)
     int result;
     static int menusInitialized = false;
 
+    if (macRomanEncoding == NULL) {
+	macRomanEncoding = Tcl_GetEncoding(NULL, "macRoman");
+    }
+    
     /* Since it is possible for TkInit to be called multiple times
      * and we don't want to do the menu initialization multiple times
      * we protect against doing it more than once.

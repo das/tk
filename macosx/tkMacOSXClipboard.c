@@ -15,9 +15,12 @@
 #include "tkInt.h"
 #include "tkPort.h"
 #include "tkMacOSXInt.h"
+#include "tkSelect.h"
 
 #include <Carbon/Carbon.h>
-#include "tkSelect.h"
+
+extern Tcl_Encoding macRomanEncoding;
+
 
 /*
  *----------------------------------------------------------------------
@@ -90,7 +93,7 @@ TkSelGetSelection(
                     return TCL_ERROR;
             }
 
-            Tcl_ExternalToUtfDString(NULL, buf, length, &encodedText);
+            Tcl_ExternalToUtfDString(macRomanEncoding, buf, length, &encodedText);
             result = (*proc)(clientData, interp,
                     Tcl_DStringValue(&encodedText));
             Tcl_DStringFree(&encodedText);

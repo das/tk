@@ -246,7 +246,7 @@ OSErr PrintHandler (const AppleEvent * event, AppleEvent * reply, long handlerRe
  *        This handler process the script event.  
  *
  * Results:
- *        Scedules the given event to be processed.
+ *        Schedules the given event to be processed.
  *
  * Side effects:
  *        None.
