@@ -3697,10 +3697,10 @@ Tk_GetFirstTextLayout(
     int numDisplayChars;
 
     layoutPtr = (TextLayout *)layout;
-    if (layoutPtr==NULL) {
-        return 0;
-    }
-    if (layoutPtr->numChunks==0) {
+    if ((layoutPtr==NULL)
+            || (layoutPtr->numChunks==0)
+            || (layoutPtr->chunks->numDisplayChars <= 0)) {
+        dst[0] = '\0';
         return 0;
     }
     chunkPtr = layoutPtr->chunks;
