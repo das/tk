@@ -3694,7 +3694,7 @@ Tk_GetFirstTextLayout(
 {
     TextLayout  *layoutPtr;
     LayoutChunk *chunkPtr;
-    int numDisplayChars;
+    int numBytesInChunk;
 
     layoutPtr = (TextLayout *)layout;
     if ((layoutPtr==NULL)
@@ -3704,10 +3704,10 @@ Tk_GetFirstTextLayout(
         return 0;
     }
     chunkPtr = layoutPtr->chunks;
-    numDisplayChars = chunkPtr->numDisplayChars;
-    strncpy(dst, chunkPtr->start, numDisplayChars);
+    numBytesInChunk = chunkPtr->numBytes;
+    strncpy(dst, chunkPtr->start, numBytesInChunk);
     *font = layoutPtr->tkfont;
-    return numDisplayChars;
+    return numBytesInChunk;
 }
 
 

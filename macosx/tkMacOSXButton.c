@@ -958,7 +958,7 @@ TkMacOSXDrawControl(
         if (bcmp(mbPtr->controlTitle, controlTitle, len+1)) {
             CFStringRef cf;    	    
             cf = CFStringCreateWithCString(NULL,
-                  controlTitle, kCFStringEncodingMacRoman);
+                  controlTitle, kCFStringEncodingUTF8);
             if (cf != NULL) {
             SetControlTitleWithCFString(mbPtr->control, cf);
             CFRelease(cf);

@@ -234,7 +234,7 @@ TkpDisplayMenuButton(
         if (titleChanged) {
             CFStringRef cf;    	    
             cf = CFStringCreateWithCString(NULL,
-                  titleParams.title, kCFStringEncodingMacRoman);
+                  titleParams.title, kCFStringEncodingUTF8);
             if (hasImageOrBitmap) {
                 SetControlTitleWithCFString(mbPtr->control, cf);
             } else {
@@ -658,7 +658,7 @@ MenuButtonInitControl (
     if (mbPtr->params.isBevel) {
             CFStringRef cf;    	    
             cf = CFStringCreateWithCString(NULL,
-                  mbPtr->titleParams.title, kCFStringEncodingMacRoman);
+                  mbPtr->titleParams.title, kCFStringEncodingUTF8);
         SetControlTitleWithCFString(mbPtr->control, cf);
         CFRelease(cf);
         if (mbPtr->titleParams.len) {
@@ -681,7 +681,7 @@ MenuButtonInitControl (
             return 1;
         }
             cf = CFStringCreateWithCString(NULL,
-                  mbPtr->titleParams.title, kCFStringEncodingMacRoman);
+                  mbPtr->titleParams.title, kCFStringEncodingUTF8);
         AppendMenuItemText(mbPtr->menuRef, "\px");
         if (cf != NULL) {
         SetMenuItemTextWithCFString(mbPtr->menuRef, 1, cf);
