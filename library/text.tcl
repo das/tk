@@ -277,7 +277,7 @@ bind Text <Control-KeyPress> {# nothing}
 bind Text <Escape> {# nothing}
 bind Text <KP_Enter> {# nothing}
 if {[string equal $tcl_platform(windowingsystem) "classic"]
-        || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
     bind Text <Command-KeyPress> {# nothing}
 }
 
@@ -395,7 +395,7 @@ bind Text <Meta-Delete> {
 
 # if text black & highlight black -> text white, other text the same
 if {[string equal $tcl_platform(windowingsystem) "classic"]
-        || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
 bind Text <FocusIn> {
     %W tag configure sel -borderwidth 0
     %W configure -selectbackground systemHighlight -selectforeground systemHighlightText

@@ -204,7 +204,7 @@ bind Entry <Return> {# nothing}
 bind Entry <KP_Enter> {# nothing}
 bind Entry <Tab> {# nothing}
 if {[string equal $tcl_platform(windowingsystem) "classic"]
-        || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	bind Entry <Command-KeyPress> {# nothing}
 }
 

@@ -58,7 +58,7 @@ tk_optionMenu $body.buttons.options menubuttonoptions one two three
 pack $body.buttons.options -side left -padx 25 -pady 25
 set m [tk_optionMenu $body.buttons.colors paletteColor Black red4 DarkGreen NavyBlue gray75 Red Green Blue gray50 Yellow Cyan Magenta White Brown DarkSeaGreen DarkViolet]
 if {[string equal $tcl_platform(windowingsystem) "classic"]
-        || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
     set topBorderColor Black
     set bottomBorderColor Black
 } else {

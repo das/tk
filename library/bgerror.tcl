@@ -219,8 +219,8 @@ proc ::tk::dialog::error::bgerror err {
 		-padx 10
 	grid columnconfigure .bgerrorDialog.bot $i -weight 1
 	# We boost the size of some Mac buttons for l&f
-        if {($tcl_platform(platform) eq "macintosh")
-             || ($tcl_platform(windowingsystem) eq "aqua")} {
+	if {($tcl_platform(platform) eq "macintosh")
+	    || ($tcl_platform(windowingsystem) eq "aqua")} {
 	    if {($name eq "ok") || ($name eq "dismiss")} {
 		grid columnconfigure .bgerrorDialog.bot $i -minsize 79
 	    }

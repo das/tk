@@ -213,7 +213,7 @@ bind Spinbox <Return> {# nothing}
 bind Spinbox <KP_Enter> {# nothing}
 bind Spinbox <Tab> {# nothing}
 if {[string equal $tcl_platform(windowingsystem) "classic"]
-        || [string equal $tcl_platform(windowingsystem) "aqua"]} {
+	|| [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	bind Spinbox <Command-KeyPress> {# nothing}
 }
 

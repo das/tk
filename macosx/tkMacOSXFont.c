@@ -2154,6 +2154,23 @@ GetFontEncoding(
     }
     return Tcl_GetEncoding(NULL, name);
 }
+
+/*
+ *----------------------------------------------------------------------
+ *
+ * TkMacOSXInitControlFontStyle --
+ *
+ *	This procedure sets up the appropriate ControlFontStyleRec
+ *	for a Mac control.
+ *
+ * Results:
+ *	None.
+ *
+ * Side effects:
+ *	None.
+ *
+ *----------------------------------------------------------------------
+ */
 
 void
 TkMacOSXInitControlFontStyle(Tk_Font tkfont, ControlFontStylePtr fsPtr)

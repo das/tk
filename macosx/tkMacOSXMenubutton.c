@@ -84,8 +84,8 @@ static void CompareControlTitleParams(
     int * styleChanged
 );
 
-int Tk_GetFirstTextLayout(Tk_TextLayout layout, Tk_Font * font, char * dst);
-void TkMacOSXInitControlFontStyle(Tk_Font tkfont,ControlFontStylePtr fsPtr);
+extern int TkFontGetFirstTextLayout(Tk_TextLayout layout, Tk_Font * font, char * dst); 
+extern void TkMacOSXInitControlFontStyle(Tk_Font tkfont,ControlFontStylePtr fsPtr);
 
 extern int tkPictureIsOpen;
 
@@ -556,7 +556,7 @@ static void
 ComputeControlTitleParams(TkMenuButton * butPtr, ControlTitleParams * paramsPtr )
 {
     Tk_Font font;
-    paramsPtr->len =Tk_GetFirstTextLayout(butPtr->textLayout,&font, paramsPtr->title);
+    paramsPtr->len =TkFontGetFirstTextLayout(butPtr->textLayout,&font, paramsPtr->title);
     paramsPtr->title [paramsPtr->len] = 0;
     if (paramsPtr->len) {
         TkMacOSXInitControlFontStyle(font,&paramsPtr->style);
