@@ -22,7 +22,6 @@
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
-
 #include <malloc.h>
 #include <errno.h>
 #include <ctype.h>
@@ -112,6 +111,5 @@ struct timezone {
 };
 
 extern int gettimeofday(struct timeval *, struct timezone *);
-EXTERN void		panic _ANSI_ARGS_(TCL_VARARGS(char *,format));
 
 #endif /* _WINPORT */
