@@ -2762,6 +2762,7 @@ Initialize(interp)
 	    if (master == NULL) {
 		Tcl_DStringFree(&ds);
 		Tcl_AppendResult(interp, "NULL master", (char *) NULL);
+		Tcl_MutexUnlock(&windowMutex);
 		return TCL_ERROR;
 	    }
 	    if (!Tcl_IsSafe(master)) {
@@ -2775,6 +2776,7 @@ Initialize(interp)
 	if (Tcl_GetInterpPath(master, interp) != TCL_OK) {
 	    Tcl_AppendResult(interp, "error in Tcl_GetInterpPath",
 		    (char *) NULL);
+	    Tcl_MutexUnlock(&windowMutex);
 	    return TCL_ERROR;
 	}
 	/*
@@ -2798,6 +2800,7 @@ Initialize(interp)
 	    Tcl_AppendResult(interp, 
 		    "not allowed to start Tk by master's safe::TkInit",
 		    (char *) NULL);
+	    Tcl_MutexUnlock(&windowMutex);
 	    return TCL_ERROR;
 	}
 	Tcl_DStringFree(&ds);
@@ -2825,6 +2828,7 @@ Initialize(interp)
 	    argError:
 	    Tcl_AddErrorInfo(interp,
 		    "\n    (processing arguments in argv variable)");
+	    Tcl_MutexUnlock(&windowMutex);
 	    return TCL_ERROR;
 	}
 	if (Tk_ParseArgv(interp, (Tk_Window) NULL, &argc, argv,
