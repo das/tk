@@ -346,8 +346,8 @@ proc ::tk::MotifFDialog_BuildUI {w} {
 
     # The buttons
     #
-	set maxWidth [::msgcat::mcmax OK Filter Cancel]
-	set maxWidth [expr $maxWidth<6?6:$maxWidth]
+    set maxWidth [::msgcat::mcmax OK Filter Cancel]
+    set maxWidth [expr {$maxWidth<6?6:$maxWidth}]
     set data(okBtn) [button $bot.ok -text [::msgcat::mc "OK"] \
 	    -width $maxWidth -under 0 \
 	    -command [list tk::MotifFDialog_OkCmd $w]]
@@ -824,7 +824,7 @@ proc ::tk::MotifFDialog_ActivateSEnt {w} {
 	    if {[string equal $data(type) save]} {
 	    set message [format %s%s \
 		[::msgcat::mc {File "%1$s" already exists.\n\n} \
-		    $selectFilePath ]
+		    $selectFilePath ] \
 		[::msgcat::mc {Replace existing file?}]]
 		set answer [tk_messageBox -icon warning -type yesno \
 				-message $message]

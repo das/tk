@@ -350,7 +350,7 @@ proc ::tk::ConsoleBind {win} {
 	}
     }
     bind $win <Insert> {
-	catch {tk::ConsoleInsert %W [selection get -displayof %W]}
+	catch {tk::ConsoleInsert %W [::tk::GetSelection %W PRIMARY]}
 	break
     }
     bind $win <KeyPress> {
@@ -397,7 +397,7 @@ proc ::tk::ConsoleBind {win} {
     }
     bind $win <<Paste>> {
 	catch {
-	    set clip [selection get -displayof %W -selection CLIPBOARD]
+	    set clip [::tk::GetSelection %W CLIPBOARD]
 	    set list [split $clip \n\r]
 	    tk::ConsoleInsert %W [lindex $list 0]
 	    foreach x [lrange $list 1 end] {
