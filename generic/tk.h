@@ -58,7 +58,7 @@ extern "C" {
  * compilers.  We use this method because there is no autoconf equivalent.
  */
 
-#if  defined(MAC_TCL) || defined(MAC_OSX_TCL)
+#if  defined(MAC_TCL) || defined(MAC_OSX_TK)
 #   ifndef REDO_KEYSYM_LOOKUP
 #	define REDO_KEYSYM_LOOKUP
 #   endif
@@ -79,7 +79,7 @@ extern "C" {
 #   if defined (MAC_TCL)
 #      include <Xlib.h>
 #      include <X.h>
-#   elif defined(MAC_OSX_TCL)
+#   elif defined(MAC_OSX_TK)
 #	include <X11/Xlib.h>
 #	include <X11/X.h>
 #   else

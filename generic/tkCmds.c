@@ -22,7 +22,7 @@
 #include "tkWinInt.h"
 #elif defined(MAC_TCL)
 #include "tkMacInt.h"
-#elif defined(MAC_OSX_TCL) 
+#elif defined(MAC_OSX_TK) 
 #include "tkMacOSXInt.h"
 #else
 #include "tkUnixInt.h"
