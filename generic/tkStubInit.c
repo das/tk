@@ -380,12 +380,11 @@ TkIntPlatStubs tkIntPlatStubs = {
     TkCreateXEventSource, /* 0 */
     TkFreeWindowId, /* 1 */
     TkInitXId, /* 2 */
-    TkpGetContainer, /* 3 */
-    TkpCmapStressed, /* 4 */
-    TkpSync, /* 5 */
-    TkUnixContainerId, /* 6 */
-    TkUnixDoOneXEvent, /* 7 */
-    TkUnixSetMenubar, /* 8 */
+    TkpCmapStressed, /* 3 */
+    TkpSync, /* 4 */
+    TkUnixContainerId, /* 5 */
+    TkUnixDoOneXEvent, /* 6 */
+    TkUnixSetMenubar, /* 7 */
 #endif /* UNIX */
 #ifdef MAC_TCL
     TkClipBox, /* 0 */

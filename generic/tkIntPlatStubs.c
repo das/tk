@@ -443,14 +443,6 @@ TkInitXId(dispPtr)
 }
 
 /* Slot 3 */
-TkWindow *
-TkpGetContainer(embeddedPtr)
-    TkWindow * embeddedPtr;
-{
-    return (tkIntPlatStubsPtr->tkpGetContainer)(embeddedPtr);
-}
-
-/* Slot 4 */
 int
 TkpCmapStressed(tkwin, colormap)
     Tk_Window tkwin;
@@ -459,7 +451,7 @@ TkpCmapStressed(tkwin, colormap)
     return (tkIntPlatStubsPtr->tkpCmapStressed)(tkwin, colormap);
 }
 
-/* Slot 5 */
+/* Slot 4 */
 void
 TkpSync(display)
     Display * display;
@@ -467,7 +459,7 @@ TkpSync(display)
     (tkIntPlatStubsPtr->tkpSync)(display);
 }
 
-/* Slot 6 */
+/* Slot 5 */
 Window
 TkUnixContainerId(winPtr)
     TkWindow * winPtr;
@@ -475,7 +467,7 @@ TkUnixContainerId(winPtr)
     return (tkIntPlatStubsPtr->tkUnixContainerId)(winPtr);
 }
 
-/* Slot 7 */
+/* Slot 6 */
 int
 TkUnixDoOneXEvent(timePtr)
     Tcl_Time * timePtr;
@@ -483,7 +475,7 @@ TkUnixDoOneXEvent(timePtr)
     return (tkIntPlatStubsPtr->tkUnixDoOneXEvent)(timePtr);
 }
 
-/* Slot 8 */
+/* Slot 7 */
 void
 TkUnixSetMenubar(tkwin, menubar)
     Tk_Window tkwin;
