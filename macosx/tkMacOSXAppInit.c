@@ -258,7 +258,10 @@ Tcl_AppInit(interp)
         if (Tk_CreateConsoleWindow(interp) == TCL_ERROR) {
             goto error;
         }
-        Tcl_Eval(interp, "console show");
+	/* Only show the console if we don't have a startup script */
+        if (TclGetStartupScriptPath() == NULL) {
+            Tcl_Eval(interp, "console show");
+        }
     }
     
     /*
