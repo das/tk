@@ -5747,3 +5747,7 @@ compositing of partially transparent areas.
 2005-01-03 Bug fix (crashes/panics during finalization/exit); feature 
 implementation for embedding/embedded Tk (Windows). See Tk 8.5 changes 
 (2004-12-17 to 2005-01-03) for details. (chengyemao)
+
+2005-01-18 Bug fixes; feature implementation for embedded/embedding Tk
+(Windows).  See Tk 8.5 changes (2005-01-07 to 2005-01-18) for details.
+(chengyemao)
