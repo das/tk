@@ -20,11 +20,11 @@
 
 #if defined(MAC_TCL)
 #include "tkMacInt.h"
-#else defined(MAC_OSX_TCL)
+#else defined(MAC_OSX_TK)
 #include "tkMacOSXInt.h"
 #endif
 
-#if defined(MAC_TCL) || defined(MAC_OSX_TCL)
+#if defined(MAC_TCL) || defined(MAC_OSX_TK)
 #include "tkInt.h"
 #include "tkPort.h"
 #endif /* MAC_TCL */
@@ -46,7 +46,7 @@
 #endif
 #undef USE_TK_STUB_PROCS
 
-#if !defined(MAC_TCL) && !defined(MAC_OSX_TCL)
+#if !defined(MAC_TCL) && !defined(MAC_OSX_TK)
 
 #include "tkPort.h"
 #include "tkInt.h"
