@@ -18,6 +18,10 @@
 #include "tkInt.h"
 #include <errno.h>
 
+#ifdef __WIN32__
+#include "tkWinInt.h"
+#endif
+
 /*
  * Forward declarations for procedures defined later in this file:
  */
