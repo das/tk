@@ -92,7 +92,7 @@ proc ::bgerror err {
 
     # Ok the application's tkerror either failed or was not found
     # we use the default dialog then :
-    if {[sting equal $tcl_platform(platform) "macintosh"]
+    if {[string equal $tcl_platform(platform) "macintosh"]
              || [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	set ok		[::msgcat::mc "Ok"]
 	set messageFont	system
