@@ -14,7 +14,7 @@
 
 #include <tk3d.h>
 
-#if !defined(__WIN32__) && !defined(MAC_TCL)
+#if !(defined(__WIN32__) || defined(MAC_TCL) || defined(MAC_OSX_TCL))
 #include "tkUnixInt.h"
 #endif
 

@@ -16,8 +16,9 @@
 #ifndef _TK_FILE_FILTER
 #define _TK_FILE_FILTER
 
-#ifdef MAC_TCL
+#if defined(MAC_TCL)
 #include <StandardFile.h>
+#define OSType long
 #else
 #define OSType long
 #endif

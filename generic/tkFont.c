@@ -3683,3 +3683,31 @@ TkDebugFont(tkwin, name)
     }
     return resultPtr;
 }
+
+int
+Tk_GetFirstTextLayout(
+    Tk_TextLayout layout,	/* Layout information, from a previous call
+				 * to Tk_ComputeTextLayout(). */
+    Tk_Font * font,
+    char    * dst
+)
+{
+    TextLayout  *layoutPtr;
+    LayoutChunk *chunkPtr;
+    int numDisplayChars;
+
+    layoutPtr = (TextLayout *)layout;
+    if (layoutPtr==NULL) {
+        return 0;
+    }
+    if (layoutPtr->numChunks==0) {
+        return 0;
+    }
+    chunkPtr = layoutPtr->chunks;
+    numDisplayChars = chunkPtr->numDisplayChars;
+    strncpy(dst, chunkPtr->start, numDisplayChars);
+    *font = layoutPtr->tkfont;
+    return numDisplayChars;
+}
+
+

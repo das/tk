@@ -82,6 +82,7 @@ TkpInit(
 	    error $msg\n\
 	}";
 
+    Tcl_SetVar2(interp, "tcl_platform", "windowingsystem", "classic", TCL_GLOBAL_ONLY);
     Tcl_DStringInit(&path);
 
     /*

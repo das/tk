@@ -22,6 +22,8 @@
 #include "tkWinInt.h"
 #elif defined(MAC_TCL)
 #include "tkMacInt.h"
+#elif defined(MAC_OSX_TCL) 
+#include "tkMacOSXInt.h"
 #else
 #include "tkUnixInt.h"
 #endif
@@ -305,7 +307,6 @@ TkBindEventProc(winPtr, eventPtr)
  *
  *----------------------------------------------------------------------
  */
-
 int
 Tk_BindtagsObjCmd(clientData, interp, objc, objv)
     ClientData clientData;	/* Main window associated with interpreter. */
@@ -390,7 +391,7 @@ Tk_BindtagsObjCmd(clientData, interp, objc, objv)
     }
     return TCL_OK;
 }
-
+
 /*
  *----------------------------------------------------------------------
  *

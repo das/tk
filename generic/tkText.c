@@ -21,7 +21,7 @@
 #include "tkPort.h"
 #include "tkInt.h"
 
-#ifdef MAC_TCL
+#if defined(MAC_TCL) || defined(MAC_OSX_TCL)
 #define Style TkStyle
 #define DInfo TkDInfo
 #endif

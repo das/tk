@@ -157,7 +157,8 @@ proc ::tk::MessageBox {args} {
     if {[lsearch -exact {info warning error question} $data(-icon)] == -1} {
 	error "bad -icon value \"$data(-icon)\": must be error, info, question, or warning"
     }
-    if {[string equal $tcl_platform(platform) "macintosh"]} {
+    if {[string equal $tcl_platform(windowingsystem) "classic"]
+            || [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	switch -- $data(-icon) {
 	    "error"     {set data(-icon) "stop"}
 	    "warning"   {set data(-icon) "caution"}
@@ -285,7 +286,8 @@ proc ::tk::MessageBox {args} {
 	wm transient $w $data(-parent)
     }    
 
-    if {[string equal $tcl_platform(platform) "macintosh"]} {
+    if {[string equal $tcl_platform(windowingsystem) "classic"]
+            || [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	unsupported::MacWindowStyle style $w dBoxProc
     }
 
@@ -293,7 +295,8 @@ proc ::tk::MessageBox {args} {
     pack $w.bot -side bottom -fill both
     frame $w.top
     pack $w.top -side top -fill both -expand 1
-    if {[string compare $tcl_platform(platform) "macintosh"]} {
+    if {![string equal $tcl_platform(windowingsystem) "classic"]
+            && ![string equal $tcl_platform(windowingsystem) "aqua"]} {
 	$w.bot configure -relief raised -bd 1
 	$w.top configure -relief raised -bd 1
     }
@@ -303,7 +306,8 @@ proc ::tk::MessageBox {args} {
     # overridden by the caller).
 
     option add *Dialog.msg.wrapLength 3i widgetDefault
-    if {[string equal $tcl_platform(platform) "macintosh"]} {
+    if {[string equal $tcl_platform(windowingsystem) "classic"]
+            || [string equal $tcl_platform(windowingsystem) "aqua"]} {
 	option add *Dialog.msg.font system widgetDefault
     } else {
 	option add *Dialog.msg.font {Times 18} widgetDefault
@@ -311,7 +315,8 @@ proc ::tk::MessageBox {args} {
 
     label $w.msg -anchor nw -justify left -text $data(-message)
     if {[string compare $data(-icon) ""]} {
-	if {[string equal $tcl_platform(platform) "macintosh"] \
+        if {([string equal $tcl_platform(windowingsystem) "classic"]
+                || [string equal $tcl_platform(windowingsystem) "aqua"])
 		|| ([winfo depth $w] < 4) || $tk_strictMotif} {
 	    label $w.bitmap -bitmap $data(-icon)
 	} else {

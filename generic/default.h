@@ -20,8 +20,10 @@
     defined(__CYGWIN__) || defined(__MINGW32__)
 #   include "tkWinDefault.h"
 #else
-#   if defined(MAC_TCL)
-#	include "tkMacDefault.h"
+#   if defined(MAC_OSX_TCL)
+#	include "tkMacOSXDefault.h"
+#   elif defined(MAC_TCL)
+#       include "tkMacDefault.h"
 #   else
 #	include "tkUnixDefault.h"
 #   endif

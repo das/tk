@@ -18,8 +18,13 @@
  * do these includes before we add the stubs defines.  This a hack.
  */
 
-#ifdef MAC_TCL
+#if defined(MAC_TCL)
 #include "tkMacInt.h"
+#else defined(MAC_OSX_TCL)
+#include "tkMacOSXInt.h"
+#endif
+
+#if defined(MAC_TCL) || defined(MAC_OSX_TCL)
 #include "tkInt.h"
 #include "tkPort.h"
 #endif /* MAC_TCL */
@@ -41,7 +46,7 @@
 #endif
 #undef USE_TK_STUB_PROCS
 
-#ifndef MAC_TCL
+#if !defined(MAC_TCL) && !defined(MAC_OSX_TCL)
 
 #include "tkPort.h"
 #include "tkInt.h"

@@ -15,7 +15,7 @@
 #include "tkPort.h"
 #include "tkInt.h"
 
-#if !defined(__WIN32__) && !defined(MAC_TCL)
+#if !(defined(__WIN32__) || defined(MAC_TCL) || defined(MAC_OSX_TCL))
 #include "tkUnixInt.h"
 #endif
 
@@ -432,7 +432,6 @@ Tk_Grab(interp, tkwin, grabGlobal)
 	}
 	Tk_Ungrab((Tk_Window) dispPtr->eventualGrabWinPtr);
     }
-
     Tk_MakeWindowExist(tkwin);
     if (!grabGlobal) {
 	Window dummy1, dummy2;
@@ -480,7 +479,7 @@ Tk_Grab(interp, tkwin, grabGlobal)
 
 	grabResult = 0;			/* Needed only to prevent gcc
 					 * compiler warnings. */
-	for (numTries = 0; numTries < 10; numTries++) {
+    	for (numTries = 0; numTries < 10; numTries++) {
 	    grabResult = XGrabPointer(dispPtr->display, winPtr->window,
 		    True, ButtonPressMask|ButtonReleaseMask|ButtonMotionMask
 		    |PointerMotionMask, GrabModeAsync, GrabModeAsync, None,
