@@ -905,8 +905,12 @@ NavServicesGetFile(
                                 pathValid = 1;
                             }
                             if (pathValid) {
-                                /* Tested this and NULL=utf-8 encoding is good here */
-                                Tcl_ExternalToUtfDString(NULL, pathPtr, -1, &fileName);
+                                /* 
+                                 * Tested this and NULL=utf-8 encoding is
+                                 * good here
+                                 */
+                                Tcl_ExternalToUtfDString(NULL, pathPtr, -1, 
+							 &fileName);
                                 if (multiple) {
                                     Tcl_ListObjAppendElement(interp, theResult, 
                                         Tcl_NewStringObj(Tcl_DStringValue(&fileName), 

@@ -25,8 +25,6 @@
 #include "tkMacOSXDebug.h"
 #include <CoreFoundation/CFString.h>
 
-extern Tcl_Encoding macRomanEncoding;
-
 typedef struct MacMenu {
     MenuRef menuHdl;		/* The Menu Manager data structure. */
     Rect menuRect;		/* The rectangle as calculated in the
@@ -3809,9 +3807,14 @@ TkpMenuInit(void)
     tkThemeMenuItemDrawingUPP 
             = NewMenuItemDrawingUPP(tkThemeMenuItemDrawingProc);
             				
-    Tcl_ExternalToUtf(NULL, macRomanEncoding, "\311", /* ellipsis character */
-        -1, 0, NULL, elipsisString,
-        TCL_UTF_MAX + 1, NULL, NULL, NULL);
+    /* 
+     * We should just hardcode the utf-8 ellipsis character into 
+     * 'elipsisString' here 
+     */
+    Tcl_ExternalToUtf(NULL, Tcl_GetEncoding(NULL, "macRoman"), 
+		      "\311", /* ellipsis character */
+		      -1, 0, NULL, elipsisString,
+		      TCL_UTF_MAX + 1, NULL, NULL, NULL);
         
     useMDEFVar = Tcl_NewStringObj("::tk::mac::useCustomMDEF", -1);
 }

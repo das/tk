@@ -135,6 +135,8 @@ extern int tkPictureIsOpen;             /* If this is 1, we are drawing to a pic
 extern TkMacOSXWindowList *tkMacOSXWindowListPtr;
 					/* The list of toplevels */
 
+extern Tcl_Encoding TkMacOSXCarbonEncoding;
+
 #include "tkIntPlatDecls.h"
 
 #endif /* _TKMACINT */

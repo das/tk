@@ -19,8 +19,6 @@
 
 #include <Carbon/Carbon.h>
 
-extern Tcl_Encoding macRomanEncoding;
-
 
 /*
  *----------------------------------------------------------------------
@@ -93,7 +91,8 @@ TkSelGetSelection(
                     return TCL_ERROR;
             }
 
-            Tcl_ExternalToUtfDString(macRomanEncoding, buf, length, &encodedText);
+            Tcl_ExternalToUtfDString(TkMacOSXCarbonEncoding, buf, length, 
+				     &encodedText);
             result = (*proc)(clientData, interp,
                     Tcl_DStringValue(&encodedText));
             Tcl_DStringFree(&encodedText);
