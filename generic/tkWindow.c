@@ -18,6 +18,10 @@
 #include "tkPort.h"
 #include "tkInt.h"
 
+#if !defined(__WIN32__) && !defined(MAC_TCL)
+#include "tkUnixInt.h"
+#endif
+
 /*
  * Count of number of main windows currently open in this process.
  */

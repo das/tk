@@ -18,8 +18,12 @@
 #include "tkInt.h"
 #include <errno.h>
 
-#ifdef __WIN32__
+#if defined(__WIN32__)
 #include "tkWinInt.h"
+#elif defined(MAC_TCL)
+#include "tkMacInt.h"
+#else
+#include "tkUnixInt.h"
 #endif
 
 /*

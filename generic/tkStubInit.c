@@ -13,6 +13,11 @@
 
 #include "tkInt.h"
 #include "tkPort.h"
+#include "tkDecls.h"
+#include "tkPlatDecls.h"
+#include "tkIntDecls.h"
+#include "tkIntPlatDecls.h"
+#include "tkIntXlibDecls.h"
 
 /*
  * Remove macros that will interfere with the definitions below.
