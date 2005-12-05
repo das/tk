@@ -5753,3 +5753,15 @@ implementation for embedding/embedded Tk (Windows). See Tk 8.5 changes
 tkStubInit.c, tkMacEmbed.c, tkMacOSXEmbed.c, tkUnixEmbed.c,	tkWin.h,
 tkWinEmbed.c, tkWinInt.h, tkWinMenu.c, tkWinWm.c and tkWinX.c. See Tk 8.5 
 changes (2005-01-07 to 2005-01-18) for details. (chengyemao)
+
+2005-11-30 Bug fixe back ported from Tk85 #1283635 crash manipulating transient
+windows (Windows): caused by calling TkInstallFrameMenu to a dead window in the
+function UpdateWrapper of tkWinWm.c
+
+2005-11-30 Bug fixe back ported from Tk85 #1311734 an embedded windows failed 
+to respond to display changes (Windows platform): need to recursively call
+InvalidateSubTreeDepth and InvalidateSubTree for an embedded window 
+int functions InvalidateSubTreeDepth and InvalidateSubTree of tkWinWm.c
+
+2005-11-30 Modified WmIconifyCmd to iconfy an embedded window properly.
+
