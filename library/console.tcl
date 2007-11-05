@@ -96,13 +96,19 @@ proc ::tk::ConsoleInit {} {
 		-command tk::ConsoleAbout
     }
 
+    AmpMenuArgs .menubar.edit add separator
+    AmpMenuArgs .menubar.edit add command -label [mc "&Increase Font Size"] \
+        -accel "$mod++" -command {event generate .console <<Console_FontSizeIncr>>}
+    AmpMenuArgs .menubar.edit add command -label [mc "&Decrease Font Size"] \
+        -accel "$mod+-" -command {event generate .console <<Console_FontSizeDecr>>}
+
     . configure -menu .menubar
 
     # See if we can find a better font than the TkFixedFont
     font create TkConsoleFont {*}[font configure TkFixedFont]
     set families [font families]
     switch -exact -- [tk windowingsystem] {
-        aqua { set preferred {Monaco 9} }
+        aqua { set preferred {Monaco 10} }
         win32 { set preferred {ProFontWindows 8 Consolas 8} }
         default { set preferred {} }
     }
@@ -375,11 +381,21 @@ proc ::tk::ConsoleBind {w} {
 	<<Console_Transpose>>		<Control-Key-t>
 	<<Console_ClearLine>>		<Control-Key-u>
 	<<Console_SaveCommand>>		<Control-Key-z>
+        <<Console_FontSizeIncr>>	<Control-Key-plus>
+        <<Console_FontSizeDecr>>	<Control-Key-minus>
     } {
 	event add $ev $key
 	bind Console $key {}
     }
-
+    if {[tk windowingsystem] eq "aqua"} {
+	foreach {ev key} {
+	    <<Console_FontSizeIncr>>	<Command-Key-plus>
+	    <<Console_FontSizeDecr>>	<Command-Key-minus>
+	} {
+	    event add $ev $key
+	    bind Console $key {}
+	}
+    }
     bind Console <<Console_Expand>> {
 	if {[%W compare insert > promptEnd]} {
 	    ::tk::console::Expand %W
@@ -534,6 +550,14 @@ proc ::tk::ConsoleBind {w} {
 		tk::ConsoleInsert %W $x
 	    }
 	}
+    }
+    bind Console <<Console_FontSizeIncr>> {
+        set size [font configure TkConsoleFont -size]
+        font configure TkConsoleFont -size [incr size]
+    }
+    bind Console <<Console_FontSizeDecr>> {
+        set size [font configure TkConsoleFont -size]
+        font configure TkConsoleFont -size [incr size -1]
     }
 
     ##
