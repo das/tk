@@ -62,9 +62,6 @@
 
 #ifdef TK_MAC_DEBUG
 
-#include <mach-o/dyld.h>
-#include <mach-o/nlist.h>
-
 typedef struct {
     EventKind kind;
     const char * name;
@@ -481,6 +478,10 @@ TkMacOSXDebugFlashRegion(
 	}
     }
 }
+#endif /* TK_MAC_DEBUG */
+
+#include <mach-o/dyld.h>
+#include <mach-o/nlist.h>
 
 /*
  *----------------------------------------------------------------------
@@ -520,7 +521,7 @@ TkMacOSXGetNamedDebugSymbol(
     if (!addr) {
 	const struct mach_header *mh = NULL;
 	uint32_t i, n = _dyld_image_count();
-	size_t module_len;
+	size_t module_len = 0;
 
 	if (module && *module) {
 	    module_len = strlen(module);
@@ -615,5 +616,3 @@ TkMacOSXGetNamedDebugSymbol(
 #endif /* __LP64__ */
     return addr;
 }
-
-#endif /* TK_MAC_DEBUG */
