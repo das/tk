@@ -28,8 +28,7 @@ namespace eval ttk::theme::aqua {
 	#
 	ttk::style configure . -stipple {}
 
-	ttk::style configure TButton -padding {0 2} -width -6
-	ttk::style configure TMenubutton -anchor w
+	ttk::style configure TButton -anchor center -width -6
 	ttk::style configure Toolbutton -padding 4
 	# See Apple HIG figs 14-63, 14-65
 	ttk::style configure TNotebook -tabposition n -padding {20 12}
@@ -51,21 +50,12 @@ namespace eval ttk::theme::aqua {
 	# Enable animation for ttk::progressbar widget:
 	ttk::style configure TProgressbar -period 100 -maxphase 255
 
-	# Modify the the default Labelframe layout to use generic text element
-	# instead of Labelframe.text; the latter erases the window background
-	# (@@@ this still isn't right... want to fill with background pattern)
-
-	ttk::style layout TLabelframe {
-	    Labelframe.border
-	    text
-	}
-	#
 	# For Aqua, labelframe labels should appear outside the border,
 	# with a 14 pixel inset and 4 pixels spacing between border and label
 	# (ref: Apple Human Interface Guidelines / Controls / Grouping Controls)
 	#
     	ttk::style configure TLabelframe \
-	    -labeloutside true -labelmargins {14 0 14 4}
+		-labeloutside true -labelmargins {14 0 14 4}
 
 	# TODO: panedwindow sashes should be 9 pixels (HIG:Controls:Split Views)
     }
