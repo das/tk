@@ -1926,7 +1926,7 @@ dnl AC_CHECK_TOOL(AR, ar)
 		    ])
 		], [AC_MSG_WARN([64bit mode not supported for $arch])])])
 	    ])
-	    
+
 	    #--------------------------------------------------------------------
 	    # On Solaris 5.x i386 with the sunpro compiler we need to link
     	    # with sunmath to get floating point rounding control
@@ -1952,6 +1952,8 @@ dnl AC_CHECK_TOOL(AR, ar)
 	    SHLIB_SUFFIX=".so"
 	    DL_OBJS="tclLoadDl.o"
 	    DL_LIBS="-ldl"
+
+
 	    AS_IF([test "$GCC" = yes], [
 		SHLIB_LD='${CC} -shared'
 		CC_SEARCH_FLAGS='-Wl,-R,${LIB_RUNTIME_DIR}'
@@ -2611,7 +2613,7 @@ AC_DEFUN([SC_TCL_LINK_LIBS], [
 
     AC_CHECK_FUNC(sin, MATH_LIBS="", MATH_LIBS="-lm")
     AC_CHECK_LIB(ieee, main, [MATH_LIBS="-lieee $MATH_LIBS"])
-
+    
     #--------------------------------------------------------------------
     # Interactive UNIX requires -linet instead of -lsocket, plus it
     # needs net/errno.h to define the socket-related error codes.
