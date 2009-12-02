@@ -224,6 +224,12 @@ EXTERN void		TkWinSetHINSTANCE (HINSTANCE hInstance);
 /* 35 */
 EXTERN int		TkWinGetPlatformTheme (void);
 #endif
+#ifndef TkWinChildProc_TCL_DECLARED
+#define TkWinChildProc_TCL_DECLARED
+/* 36 */
+EXTERN LRESULT CALLBACK	 TkWinChildProc (HWND hwnd, UINT message, 
+				WPARAM wParam, LPARAM lParam);
+#endif
 #endif /* WIN */
 #ifdef MAC_OSX_TK /* AQUA */
 #ifndef TkGenerateActivateEvents_TCL_DECLARED
@@ -595,6 +601,7 @@ typedef struct TkIntPlatStubs {
     int (*tkWinGetPlatformId) (void); /* 33 */
     void (*tkWinSetHINSTANCE) (HINSTANCE hInstance); /* 34 */
     int (*tkWinGetPlatformTheme) (void); /* 35 */
+    LRESULT (CALLBACK *tkWinChildProc) (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam); /* 36 */
 #endif /* WIN */
 #ifdef MAC_OSX_TK /* AQUA */
     void (*tkGenerateActivateEvents) (TkWindow * winPtr, int active); /* 0 */
@@ -670,8 +677,6 @@ typedef struct TkIntPlatStubs {
 #endif /* X11 */
 } TkIntPlatStubs;
 
-#if defined(USE_TK_STUBS) && !defined(USE_TK_STUB_PROCS)
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -679,8 +684,6 @@ extern TkIntPlatStubs *tkIntPlatStubsPtr;
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* defined(USE_TK_STUBS) && !defined(USE_TK_STUB_PROCS) */
 
 #if defined(USE_TK_STUBS) && !defined(USE_TK_STUB_PROCS)
 
@@ -829,6 +832,10 @@ extern TkIntPlatStubs *tkIntPlatStubsPtr;
 #ifndef TkWinGetPlatformTheme
 #define TkWinGetPlatformTheme \
 	(tkIntPlatStubsPtr->tkWinGetPlatformTheme) /* 35 */
+#endif
+#ifndef TkWinChildProc
+#define TkWinChildProc \
+	(tkIntPlatStubsPtr->tkWinChildProc) /* 36 */
 #endif
 #endif /* WIN */
 #ifdef MAC_OSX_TK /* AQUA */
