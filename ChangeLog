@@ -1,14 +1,3 @@
-2011-01-19  Jan Nijtmans  <nijtmans@users.sf.net>
-
-	* generic/ttk/ttkGenStubs.tcl:   Make sure to use CONST/VOID in stead of
-	* generic/ttkDecls.h            const/void when appropriate. This allows to
-	use const/void in the *.decls file always, genStubs will do the right thing.
-
-2011-01-17  Jan Nijtmans  <nijtmans@users.sf.net>
-
-	* win/tcl.m4:         handle --enable-64bit=ia64 for gcc. BACKPORT.
-	* win/configure:      (autoconf-2.59)
-
 2011-01-13  Jan Nijtmans  <nijtmans@users.sf.net>
 
 	* library/msgbox.tcl: [Patch #3154705] Close button has no effect
